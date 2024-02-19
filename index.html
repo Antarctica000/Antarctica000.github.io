@@ -1,205 +1,23 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  
-  <title>Antarctica</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Antarctica Blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Antarctica">
-<meta property="og:url" content="https://antarctica.github.io/project/index.html">
-<meta property="og:site_name" content="Antarctica">
-<meta property="og:description" content="Antarctica Blog">
-<meta property="og:locale" content="zh_CN">
-<meta property="article:author" content="Antarctica">
-<meta property="article:tag" content="Antarctica,Blog">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/project/atom.xml" title="Antarctica" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/project/favicon.png">
-  
-  
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+{% extends '_layout.swig' %}
+{% import '_macro/post.swig' as post_template %}
+{% import '_macro/sidebar.swig' as sidebar_template %}
 
-  
-  
-<link rel="stylesheet" href="/project/css/style.css">
+{% block title %}{{ config.title }}{% if theme.index_with_subtitle and config.subtitle %} - {{config.subtitle }}{% endif %}{% endblock %}
 
-  
-    
-<link rel="stylesheet" href="/project/fancybox/jquery.fancybox.min.css">
+{% block page_class %}
+  {% if is_home() %}page-home{% endif -%}
+{% endblock %}
 
-  
-  
-<meta name="generator" content="Hexo 6.3.0"></head>
+{% block content %}
+  <section id="posts" class="posts-expand">
+    {% for post in page.posts %}
+      {{ post_template.render(post, true) }}
+    {% endfor %}
+  </section>
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/project/" id="logo">Antarctica</a>
-      </h1>
-      
-        <h2 id="subtitle-wrap">
-          <a href="/project/" id="subtitle">Antarctica Blog</a>
-        </h2>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
-        
-          <a class="main-nav-link" href="/project/">Home</a>
-        
-          <a class="main-nav-link" href="/project/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-        
-          <a class="nav-icon" href="/project/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://Antarctica.github.io/project"></form>
-      </div>
-    </div>
-  </div>
-</header>
+  {% include '_partials/pagination.swig' %}
+{% endblock %}
 
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/project/2024/01/28/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2024-01-28T08:02:27.346Z" itemprop="datePublished">2024-01-28</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/project/2024/01/28/hello-world/">Antarctica Blog</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>Welcome to my blog ! </p>
-<h2 id="Articles"><a href="#Articles" class="headerlink" title="Articles"></a>Articles</h2><p>​        Hello World！这是我的第一篇非正式文章。作为一个一窍不通的小白，不知道查阅了多少杂七杂八的文档，遇到了多少莫名其妙的问题，断断续续花费了好多时间，终于初步搭建起了一个最简陋的Blog。成功的那一刻，内心的成就感足以抵过之前的所有烦躁与焦头烂额。缘分使我们在这个最开始的地方相遇！</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://antarctica.github.io/project/2024/01/28/hello-world/" data-id="clsqvtp6j0000r8t28ijs1i2d" data-title="Antarctica Blog" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/project/archives/2024/01/">一月 2024</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/project/2024/01/28/hello-world/">Antarctica Blog</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2024 Antarctica<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/project/" class="mobile-nav-link">Home</a>
-  
-    <a href="/project/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-
-<script src="/project/js/jquery-3.6.4.min.js"></script>
-
-
-
-  
-<script src="/project/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/project/js/script.js"></script>
-
-
-
-
-
-  </div>
-</body>
-</html>
+{% block sidebar %}
+  {{ sidebar_template.render(false) }}
+{% endblock %}
