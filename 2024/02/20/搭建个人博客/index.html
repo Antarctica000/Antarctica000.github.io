@@ -21,15 +21,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"antarctica.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="小白将会在这里分享小白都能会的个人博客搭建方法。包括小白花了好多时间搜罗的一大堆杂七杂八的资料汇总，遇到的一系列麻烦问题与解决方法。希望能对另一个小白有帮助。（大佬也可以来欣赏一下小白的崩溃心路历程） 当然，小白现在也不懂太多原理，但是小白会去学习。">
+    <meta name="description" content="前言：小白将会在这里分享小白都能会的个人博客搭建方法。包括小白花了好多时间搜罗的一大堆杂七杂八的资料汇总，遇到的一系列麻烦问题与解决方法。希望能对另一个小白有帮助。（大佬也可以来欣赏一下小白的崩溃心路历程） 当然，小白现在也不懂太多原理，但是小白会去学习。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="搭建个人博客">
 <meta property="og:url" content="https://antarctica.github.io/2024/02/20/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/index.html">
 <meta property="og:site_name" content="Antarctica">
-<meta property="og:description" content="小白将会在这里分享小白都能会的个人博客搭建方法。包括小白花了好多时间搜罗的一大堆杂七杂八的资料汇总，遇到的一系列麻烦问题与解决方法。希望能对另一个小白有帮助。（大佬也可以来欣赏一下小白的崩溃心路历程） 当然，小白现在也不懂太多原理，但是小白会去学习。">
+<meta property="og:description" content="前言：小白将会在这里分享小白都能会的个人博客搭建方法。包括小白花了好多时间搜罗的一大堆杂七杂八的资料汇总，遇到的一系列麻烦问题与解决方法。希望能对另一个小白有帮助。（大佬也可以来欣赏一下小白的崩溃心路历程） 当然，小白现在也不懂太多原理，但是小白会去学习。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-02-20T09:09:28.000Z">
-<meta property="article:modified_time" content="2024-02-21T13:09:02.917Z">
+<meta property="article:modified_time" content="2024-02-22T11:49:18.002Z">
 <meta property="article:author" content="Antarctica">
 <meta property="article:tag" content="技术">
 <meta name="twitter:card" content="summary">
@@ -102,7 +102,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -115,6 +115,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#GitHub-Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2"><span class="nav-number">1.</span> <span class="nav-text">GitHub+Hexo搭建个人博客</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%BF%85%E8%A6%81%E5%B7%A5%E5%85%B7"><span class="nav-number">2.</span> <span class="nav-text">一、必要工具</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%AE%89%E8%A3%85%E5%B9%B6%E9%85%8D%E7%BD%AENode-js%EF%BC%88%E6%9C%80%E5%A5%BD%E4%BB%A5%E7%AE%A1%E7%90%86%E5%91%98%E8%BA%AB%E4%BB%BD%E8%BF%90%E8%A1%8C%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">1. 安装并配置Node.js（最好以管理员身份运行）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%AE%89%E8%A3%85%E5%B9%B6%E9%85%8D%E7%BD%AEgit"><span class="nav-number">2.2.</span> <span class="nav-text">2. 安装并配置git</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E5%AE%89%E8%A3%85Hexo"><span class="nav-number">2.3.</span> <span class="nav-text">3. 安装Hexo</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E6%9C%AC%E5%9C%B0%E7%94%9F%E6%88%90%E5%8D%9A%E5%AE%A2"><span class="nav-number">3.</span> <span class="nav-text">二、本地生成博客</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E4%B8%8A%E4%BC%A0%E5%88%B0Github"><span class="nav-number">4.</span> <span class="nav-text">三、上传到Github</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E6%92%B0%E5%86%99%E5%8D%9A%E5%AE%A2"><span class="nav-number">5.</span> <span class="nav-text">四、撰写博客</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -208,7 +209,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-02-21 21:09:02" itemprop="dateModified" datetime="2024-02-21T21:09:02+08:00">2024-02-21</time>
+      <time title="修改时间：2024-02-22 19:49:18" itemprop="dateModified" datetime="2024-02-22T19:49:18+08:00">2024-02-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -236,8 +237,68 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>小白将会在这里分享小白都能会的个人博客搭建方法。包括小白花了好多时间搜罗的一大堆杂七杂八的资料汇总，遇到的一系列麻烦问题与解决方法。希望能对另一个小白有帮助。（大佬也可以来欣赏一下小白的崩溃心路历程）</p>
+    <div class="post-body" itemprop="articleBody"><p><strong>前言：</strong>小白将会在这里分享小白都能会的个人博客搭建方法。包括小白花了好多时间搜罗的一大堆杂七杂八的资料汇总，遇到的一系列麻烦问题与解决方法。希望能对另一个小白有帮助。（大佬也可以来欣赏一下小白的崩溃心路历程）</p>
 <p>当然，小白现在也不懂太多原理，但是小白会去学习。<span id="more"></span></p>
+<h3 id="GitHub-Hexo搭建个人博客"><a href="#GitHub-Hexo搭建个人博客" class="headerlink" title="GitHub+Hexo搭建个人博客"></a>GitHub+Hexo搭建个人博客</h3><h3 id="一、必要工具"><a href="#一、必要工具" class="headerlink" title="一、必要工具"></a>一、必要工具</h3><h4 id="1-安装并配置Node-js（最好以管理员身份运行）"><a href="#1-安装并配置Node-js（最好以管理员身份运行）" class="headerlink" title="1. 安装并配置Node.js（最好以管理员身份运行）"></a>1. 安装并配置Node.js（最好以管理员身份运行）</h4><p>视频教程：<br>【Node.js安装及环境变量配置】 <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV19F411t7zX/?share_source=copy_web&vd_source=b145aabb057e0f34d733fe380f0e45ce">https://www.bilibili.com/video/BV19F411t7zX/?share_source=copy_web&amp;vd_source=b145aabb057e0f34d733fe380f0e45ce</a></p>
+<p>（评论区下方基本能找到各种报错的解决办法）</p>
+<h4 id="2-安装并配置git"><a href="#2-安装并配置git" class="headerlink" title="2. 安装并配置git"></a>2. 安装并配置git</h4><p>视频教程：<br>【【2022最新Git教程】02 Git安装配置 | 一套带走 快速上手 保姆级 | 持续更新】 <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV133411A7zU/?share_source=copy_web&vd_source=b145aabb057e0f34d733fe380f0e45ce">https://www.bilibili.com/video/BV133411A7zU/?share_source=copy_web&amp;vd_source=b145aabb057e0f34d733fe380f0e45ce</a></p>
+<h4 id="3-安装Hexo"><a href="#3-安装Hexo" class="headerlink" title="3. 安装Hexo"></a>3. 安装Hexo</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+
+<h3 id="二、本地生成博客"><a href="#二、本地生成博客" class="headerlink" title="二、本地生成博客"></a>二、本地生成博客</h3><p><strong>1. 在本地创建一个名为Blog的文件夹，并右键Git Bash Here</strong></p>
+<p><strong>2. 初始化Hexo</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init</span><br></pre></td></tr></table></figure>
+
+<p>成功标识：<code>INFO   Start blogging with Hexo !</code></p>
+<p><strong>3. 生成本地的Hexo页面并访问</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+
+<p>本地地址：<a target="_blank" rel="noopener" href="http://localhost:4000/">http://localhost:4000/</a><br>按<code>Ctrl+c</code>关闭服务器</p>
+<h3 id="三、上传到Github"><a href="#三、上传到Github" class="headerlink" title="三、上传到Github"></a>三、上传到Github</h3><p><strong>1. 新建一个GitHub仓库</strong></p>
+<p>名字为你的用户名.github.io（最好不要初始生成README文件）<br>举例:<code>Antarctica000.github.io</code></p>
+<p><strong>2. 修改Blog中的配置文件</strong></p>
+<p>打开Blog根目录下的<code>_config.yml</code>文件（可以用VScode）<br>划拉到文件底部最后四行，改成这样：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: https://github.com/Antarctica000/Antarctica000.github.io.git（你的仓库地址）</span><br><span class="line">  branch: master （你的默认分支）</span><br></pre></td></tr></table></figure>
+
+<p>一定要注意<mark>冒号后面空格</mark>！！！小白因此花费了一个世纪的时间找错误QAQ</p>
+<p><strong>3. 安装<code>hexo-deployer-git</code>自动部署发布工具</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+<p><strong>4. 生成静态文件</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure>
+
+<p><strong>5. 部署到远程服务器</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+<p>这里如果出现网络报错，多试几遍即可。（小白在这里卡了三个世纪，直到换了一个WiFi）如果还是不行，可以尝试关闭360<del>或者使用科学上网工具</del>。</p>
+<p><strong>6. 其他</strong></p>
+<p>在看似简单的过程中，有可能会遇到各种千奇百怪的问题，请耐心地调试，相信你花费的时间一定没有小白久QAQ</p>
+<h3 id="四、撰写博客"><a href="#四、撰写博客" class="headerlink" title="四、撰写博客"></a>四、撰写博客</h3><p><strong>1. 了解文件</strong></p>
+<p>打开Blog根目录：</p>
+<ul>
+<li><p><code>_config.yml</code> : 站点配置文件，之后会经常打交道的文件。与博客的格式、内容相关的设置都在这个文件里修改。</p>
+</li>
+<li><p><code>node_modules</code> : 存储Hexo插件的文件，可以实现各种扩展功能。</p>
+</li>
+<li><p><code>scaffolds</code> ：模板文件夹，里面的 post.md 文件可以设置每一篇博客的模板。</p>
+</li>
+<li><p><code>source</code> ：所有的个人文件例如文章都在里面。很重要。</p>
+</li>
+<li><p><code>themes</code> ：主题文件夹，可以下载各种各样美观的主题。</p>
+</li>
+</ul>
+<p><strong>2. 下载主题并配置</strong></p>
+<p>懒一点的话，可以从Hexo官网或GitHub里挑选自己喜欢的主题下载。<br>在Blog根目录下执行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone （主题的网址）</span><br></pre></td></tr></table></figure>
+
+<p>然后打开Blog根目录里的<code>_config.yml</code>文件，搜索theme关键词，把默认值改为你下载的主题名字。</p>
+<p>再进入themes文件夹，找到<code>_config.yml</code>文件（不同于Blog根目录下的站点配置文件），然后根据你下载主题的官方文档，修改里面的配置，使它成为你的博客！</p>
+<p>如果不怕麻烦想要更精美，可以下载Butterfly主题自行DIY。推荐一篇博客：<br><strong>海拥Butterfly主题美化：</strong><a target="_blank" rel="noopener" href="http://haiyong.site/post/22e1d5da.html">http://haiyong.site/post/22e1d5da.html</a></p>
+<p><strong>3. 发布文章</strong></p>
+<p>打开source文件夹，进入并新建.md文件进行编辑即可。<br>记得每次修改完成后最好执行这四个命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hexo cl</span><br><span class="line">hexo g</span><br><span class="line">hexo s（每次写完文章后可以先直接输入此命令，在本地预览效果，满意之后再往下执行）</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+<p><strong>4. 其他</strong></p>
+<p>如果想要绑定自己的域名，请自行搜索相关教程。谨慎绑定！</p>
 
     </div>
 
