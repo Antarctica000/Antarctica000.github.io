@@ -127,7 +127,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -160,6 +160,536 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://antarctica.github.io/2024/03/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/people.jpg">
+      <meta itemprop="name" content="Antarctica">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Antarctica">
+      <meta itemprop="description" content="Antarctica Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Antarctica">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/03/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">数据结构与算法笔记</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-03-06 08:57:23 / 修改时间：11:36:39" itemprop="dateCreated datePublished" datetime="2024-03-06T08:57:23+08:00">2024-03-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>前言：</strong>一些感悟的零散杂碎</p>
+<p>一、Fibonacci的记忆优化法</p>
+<p>原始代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">fibonacci</span><span class="params">(<span class="type">int</span> n)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> f(n);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">f</span><span class="params">(<span class="type">int</span> n)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (n==<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> (n==<span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">return</span> f(n-<span class="number">1</span>)+f(n-<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+
+<p>记忆优化法：<br>剪枝，大大简化多路递归的重复计算</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">fibonacci</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">        <span class="type">int</span>[] a = <span class="keyword">new</span> <span class="title class_">int</span>[n + <span class="number">1</span>];</span><br><span class="line">        Arrays.fill(a, -<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> f(n, a);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">f</span><span class="params">(<span class="type">int</span> n, <span class="type">int</span>[] a)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (a[n] != -<span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span> a[n];</span><br><span class="line">        a[n] = f(n - <span class="number">1</span>, a) + f(n - <span class="number">2</span>, a);</span><br><span class="line">        <span class="keyword">return</span> a[n];</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>动态规划：（递归改循环还可以避免爆栈问题）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">fibonacci</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (n &lt;= <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> n;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="type">int</span>[] dp = <span class="keyword">new</span> <span class="title class_">int</span>[n + <span class="number">1</span>];</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        dp[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">2</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            dp[i] = dp[i - <span class="number">1</span>] + dp[i - <span class="number">2</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> dp[n];</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>二、杨辉三角</p>
+<p>记忆优化法：以空间换时间O(2<sup>n</sup>)–O(n<sup>2</sup>)（思考能否用一维数组实现空间重用）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Scanner</span> <span class="variable">sc</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">        <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> sc.nextInt();</span><br><span class="line">        print(n);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">print</span><span class="params">(<span class="type">int</span> n)</span>&#123;</span><br><span class="line">        <span class="type">int</span>[][]a=<span class="keyword">new</span> <span class="title class_">int</span>[n][n];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt;= i; j++) &#123;</span><br><span class="line">                System.out.printf(<span class="string">&quot;%-4d&quot;</span>, element(i, j, a));</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">element</span><span class="params">(<span class="type">int</span> i, <span class="type">int</span> j, <span class="type">int</span>[][] a)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(a[i][j]!=<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> a[i][j];</span><br><span class="line">        <span class="keyword">if</span> (j == <span class="number">0</span> || j == i) &#123;</span><br><span class="line">            a[i][j]=<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        a[i][j] = element(i - <span class="number">1</span>, j - <span class="number">1</span>, a) + element(i - <span class="number">1</span>, j, a);</span><br><span class="line">        <span class="keyword">return</span> a[i][j];</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>动态规划：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Scanner</span> <span class="variable">sc</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">        <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> sc.nextInt();</span><br><span class="line">        print(n);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">print</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">        <span class="type">int</span>[] row=<span class="keyword">new</span> <span class="title class_">int</span>[n];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            creatRow(row,i);</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt;= i; j++) &#123;</span><br><span class="line">                System.out.printf(<span class="string">&quot;%-4d&quot;</span>,row[j]);</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">creatRow</span><span class="params">(<span class="type">int</span>[] row, <span class="type">int</span> i)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (i == <span class="number">0</span>) &#123;</span><br><span class="line">            row[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;<span class="comment">//从后往前依次取两数相加</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i; j &gt; <span class="number">0</span>; j--) &#123;</span><br><span class="line">            row[j] = row[j] + row[j - <span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://antarctica.github.io/2024/03/05/JavaSE%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/people.jpg">
+      <meta itemprop="name" content="Antarctica">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Antarctica">
+      <meta itemprop="description" content="Antarctica Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Antarctica">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/03/05/JavaSE%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">JavaSE笔记</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-03-05 19:34:23" itemprop="dateCreated datePublished" datetime="2024-03-05T19:34:23+08:00">2024-03-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-03-19 10:08:59" itemprop="dateModified" datetime="2024-03-19T10:08:59+08:00">2024-03-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>前言：JavaSE的自我梳理与常见误区等。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://antarctica.github.io/2024/03/05/%E8%87%AA%E5%88%B6%E5%8A%A8%E6%80%81%E6%95%B0%E7%BB%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/people.jpg">
+      <meta itemprop="name" content="Antarctica">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Antarctica">
+      <meta itemprop="description" content="Antarctica Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Antarctica">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/03/05/%E8%87%AA%E5%88%B6%E5%8A%A8%E6%80%81%E6%95%B0%E7%BB%84/" class="post-title-link" itemprop="url">自制动态数组</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-03-05 08:28:23 / 修改时间：09:24:53" itemprop="dateCreated datePublished" datetime="2024-03-05T08:28:23+08:00">2024-03-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>前言：自制简陋动态数组，加深对原理的理解<br>（感觉自己像个小偷 一旦不会写了就去偷偷Ctrl+C源码的好东西。。）</p>
+<p>（用stream去重非常非常好！！！）</p>
+<p>1.add方法与toString方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> Arrays.toString(array);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>ArrayList</code> 类和简单数组都有其对应的 <code>toString</code> 实现，它们可以直接与 <code>Arrays.toString()</code> 配合使用。对于简单数组，<code>Arrays.toString()</code> 能够直接处理因为它被重载了多次以处理不同基本类型的数组（比如 <code>int[]</code>, <code>char[]</code>, <code>double[]</code> 等）以及对象数组（比如 <code>String[]</code>, <code>Integer[]</code>, <code>Object[]</code> 等）。<br>当你创建自己的动态数组类时，这个类是一个自定义的对象，不是数组类型。<code>Arrays.toString()</code> 方法不知道如何处理这个类的实例，因为它不是一个数组。它只能接受一个真正的数组作为参数。<br>如果你的动态数组类内部使用了一个原生数组来存储元素，你需要在类的 <code>toString()</code> 方法中调用 <code>Arrays.toString()</code> 并传入那个内部数组。<br>当你调用 <code>System.out.println(instance);</code>，Java 会自动调用你为你的动态数组类提供的 <code>toString()</code> 方法，而该方法会返回 <code>Arrays.toString(array)</code> 的结果，其中 <code>array</code> 是你的内部存储结构。这样就可以打印出动态数组的内容了</p>
+<p>2.size为0时第一次添加index为0怎么办？怎么处理这个逻辑？看看源码别人是怎么写的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> index, <span class="type">int</span> element)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (index &gt;= <span class="number">0</span> &amp;&amp; index &lt; size) &#123;</span><br><span class="line">            System.arraycopy(array, index, array, index + <span class="number">1</span>, size - index);</span><br><span class="line">            array[index] = element;</span><br><span class="line">            size++;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (index==size) &#123;</span><br><span class="line">            </span><br><span class="line">        &#125; <span class="keyword">else</span></span><br><span class="line">            System.out.println(<span class="string">&quot;ArrayIndexOutOfBoundsException!&quot;</span>);</span><br><span class="line">            <span class="comment">//此处有一些终止程序运行的逻辑</span></span><br></pre></td></tr></table></figure>
+
+<p>ArrayList：利用空参创建集合，在底层创建一个默认长度为0的数组，添加第一个元素时，底层会创建一个长度为10的数组。这就很好的解决了问题！</p>
+<p>size的两个含义：元素个数和下次应存的位置。</p>
+<p>3.很好的遍历方式forEach</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//很好的遍历方式，这样遍历时做什么就可以直接由外部决定，较灵活</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">forEach</span><span class="params">(Consumer&lt;Integer&gt; consumer)</span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; size; i++) &#123;</span><br><span class="line">            consumer.accept(array[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>它使用了 Java 的函数式编程特性。方法 <code>forEach</code> 接受一个 <code>Consumer&lt;Integer&gt;</code> 类型的参数，这个参数是一个函数式接口，代表了接受单个输入参数并且不返回结果的操作。在这个方法中，<code>Consumer&lt;Integer&gt;</code> 接口用来对整数进行操作。外部则可以使用lambda表达式进行想要的操作。<br>函数式编程的第一个特点就是可以把函数作为参数传递给另一个函数，也就是所谓的高阶函数。例如，对数组进行排序，可以传入一个排序函数作为参数：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String[] array = &#123; &quot;orange&quot;, &quot;Pear&quot;, &quot;Apple&quot; &#125;;</span><br><span class="line">Arrays.sort(array, String::compareToIgnoreCase);</span><br></pre></td></tr></table></figure>
+
+<p>函数式编程的第二个特点就是可以返回一个函数，这样就可以实现闭包或者惰性计算：</p>
+<p>以上两个特点还仅仅是简化了代码。从代码的可维护性上讲，函数式编程最大的好处是引用透明，即函数运行的结果只依赖于输入的参数，而不依赖于外部状态，因此，我们常常说函数式编程没有副作用。</p>
+<p>没有副作用有个巨大的好处，就是函数内部无状态，即输入确定，输出就是确定的，容易测试和维护。</p>
+<p>4.迭代器遍历</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Iterator&lt;Integer&gt; <span class="title function_">iterator</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">//因为Iterator是接口，所以需要new一个实例对象</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Iterator</span>&lt;Integer&gt;() &#123;</span><br><span class="line">            <span class="type">int</span> i=<span class="number">0</span>;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">hasNext</span><span class="params">()</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> i&lt;size;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> Integer <span class="title function_">next</span><span class="params">()</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> array[i++];<span class="comment">//返回当前元素之后移动到下一个元素</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>5.流（超棒的）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//流的实现</span></span><br><span class="line">    <span class="keyword">public</span> IntStream <span class="title function_">stream</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="comment">//只将有效部分传入</span></span><br><span class="line">        <span class="keyword">return</span> IntStream.of(Arrays.copyOfRange(array,<span class="number">0</span>,size));</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>6.完整代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> Demo5;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"><span class="keyword">import</span> java.util.Iterator;</span><br><span class="line"><span class="keyword">import</span> java.util.function.Consumer;</span><br><span class="line"><span class="keyword">import</span> java.util.stream.IntStream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DynamicArray</span> <span class="keyword">implements</span> <span class="title class_">Iterable</span>&lt;Integer&gt; &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> size;<span class="comment">//大小</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> capacity;<span class="comment">//容量</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span>[] array;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">DynamicArray</span><span class="params">()</span> &#123;</span><br><span class="line">        array = <span class="literal">null</span>;</span><br><span class="line">        size = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//抽取检查索引方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">rangeCheck</span><span class="params">(<span class="type">int</span> index)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (index &lt; <span class="number">0</span> || index &gt;= size)</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IndexOutOfBoundsException</span>(<span class="string">&quot;ArrayIndexOutOfBoundsException&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//很重要的扩容</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">ensureCapacity</span><span class="params">(<span class="type">int</span> minCapacity)</span> &#123;</span><br><span class="line">        <span class="comment">//如果添加第一个元素，则初始化数组</span></span><br><span class="line">        <span class="keyword">if</span> (array == <span class="literal">null</span>)</span><br><span class="line">            array = <span class="keyword">new</span> <span class="title class_">int</span>[Math.max(minCapacity, <span class="number">10</span>)];<span class="comment">//很好的比较</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (array.length &lt; minCapacity) &#123;</span><br><span class="line">            <span class="comment">//普通情况翻倍</span></span><br><span class="line">            <span class="type">int</span> <span class="variable">newCapacity</span> <span class="operator">=</span> array.length * <span class="number">2</span>;</span><br><span class="line">            <span class="comment">//还是不足则扩至需要容量</span></span><br><span class="line">            <span class="keyword">if</span> (newCapacity &lt; minCapacity)</span><br><span class="line">                newCapacity = minCapacity;</span><br><span class="line">            <span class="comment">//创建并返回一个新的数组</span></span><br><span class="line">            array = Arrays.copyOf(array, newCapacity);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> index, <span class="type">int</span> element)</span> &#123;</span><br><span class="line">        <span class="comment">//检查索引是否有效(这个别抽取)</span></span><br><span class="line">        <span class="keyword">if</span> (index &lt; <span class="number">0</span> || index &gt; size)</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IndexOutOfBoundsException</span>(<span class="string">&quot;ArrayIndexOutOfBoundsException&quot;</span>);</span><br><span class="line">        <span class="comment">//确保所需最小容量足够，否则扩容</span></span><br><span class="line">        ensureCapacity(size + <span class="number">1</span>);</span><br><span class="line">        <span class="comment">//若在中间插入需要多做一步</span></span><br><span class="line">        <span class="keyword">if</span> (index &lt; size)</span><br><span class="line">            System.arraycopy(array, index, array, index + <span class="number">1</span>, size - index);</span><br><span class="line">        <span class="comment">//将中间或末尾插入的逻辑合在一块</span></span><br><span class="line">        array[index] = element;</span><br><span class="line">        size++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//删除指定索引的元素并且返回删除的元素值</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">remove</span><span class="params">(<span class="type">int</span> index)</span>&#123;</span><br><span class="line">        rangeCheck(index);</span><br><span class="line">        <span class="type">int</span> removed=array[index];</span><br><span class="line">        <span class="keyword">if</span>(index&lt;size-<span class="number">1</span>)</span><br><span class="line">            System.arraycopy(array,index+<span class="number">1</span>,array,index,size-index-<span class="number">1</span>);</span><br><span class="line">        size--;</span><br><span class="line">        <span class="keyword">return</span> removed;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//forEach遍历方式(避免与iterator中的forEach重复改成小写)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">foreach</span><span class="params">(Consumer&lt;Integer&gt; consumer)</span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; size; i++) &#123;</span><br><span class="line">            consumer.accept(array[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//迭代器遍历</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Iterator&lt;Integer&gt; <span class="title function_">iterator</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">//因为Iterator是接口，所以需要new一个实例对象</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Iterator</span>&lt;Integer&gt;() &#123;</span><br><span class="line">            <span class="type">int</span> i=<span class="number">0</span>;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">hasNext</span><span class="params">()</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> i&lt;size;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> Integer <span class="title function_">next</span><span class="params">()</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> array[i++];<span class="comment">//返回当前元素之后移动到下一个元素</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//流的实现</span></span><br><span class="line">    <span class="keyword">public</span> IntStream <span class="title function_">stream</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="comment">//只将有效部分传入</span></span><br><span class="line">        <span class="keyword">return</span> IntStream.of(Arrays.copyOfRange(array,<span class="number">0</span>,size));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">get</span><span class="params">(<span class="type">int</span> index)</span> &#123;</span><br><span class="line">        rangeCheck(index);</span><br><span class="line">        <span class="keyword">return</span> array[index];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">size</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> size;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isEmpty</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> size == <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//打印</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> Arrays.toString(Arrays.copyOf(array,size));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://antarctica.github.io/2024/03/03/%E6%96%87%E5%AD%97%E5%B0%8F%E6%B8%B8%E6%88%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/people.jpg">
+      <meta itemprop="name" content="Antarctica">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Antarctica">
+      <meta itemprop="description" content="Antarctica Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Antarctica">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/03/03/%E6%96%87%E5%AD%97%E5%B0%8F%E6%B8%B8%E6%88%8F/" class="post-title-link" itemprop="url">文字小游戏</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-03-03 15:36:23" itemprop="dateCreated datePublished" datetime="2024-03-03T15:36:23+08:00">2024-03-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-03-04 23:31:36" itemprop="dateModified" datetime="2024-03-04T23:31:36+08:00">2024-03-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>前言：</strong>2024年3月3日，我在此做出了一个郑重的决定——从零开始一点一点做一个属于自己的文字冒险小游戏。虽然现在连javaSE都没有学完，但是会用自己的“毕生所学”先做出一个大体的框架出来，再用之后的知识能力逐步完善升级。例如数据库存档、前端界面等等。</p>
+<h3 id="2024-3-3-流程图"><a href="#2024-3-3-流程图" class="headerlink" title="2024&#x2F;3&#x2F;3 流程图"></a>2024&#x2F;3&#x2F;3 流程图</h3><p>突然发现自己还不会做项目流程图？平时虽然有练几个最最简单的管理系统、拼图小游戏等，但是都是由前人的大体思路领着走的，这次完完全全的从零开始，一下子就手忙脚乱不知道怎么策划了。</p>
+<h3 id="2024-3-4-设计基本界面与类"><a href="#2024-3-4-设计基本界面与类" class="headerlink" title="2024&#x2F;3&#x2F;4 设计基本界面与类"></a>2024&#x2F;3&#x2F;4 设计基本界面与类</h3><p>遇到的问题：</p>
+<ol>
+<li><p>Player与Enemy有抽象父类Role，我想要Enemy也为抽象父类，有两个子类Max和min继承它。我想要的是Player构造的时候初始默认hp为100，mp为50，Max初始默认hp为150，mp为100，min初始默认hp为20，mp为10，怎么写代码中的构造方法？完整的构造一定要写么？应该没要求吧，有默认构造就行了</p>
+<p>&#x2F;&#x2F; 如果你需要设置玩家的名字，并且使用默认的生命值和魔法值    public Player(String name) {        super(name, 100, 50, false);    }这样不就好了！</p>
+</li>
+<li><p>要不要写角色、敌人、武器等的接口？接口在此能有什么应用场景？</p>
+</li>
+<li><p>游戏一环套一环是不是要写无数个for与if循环好麻烦？</p>
+<p>可以使用状态机的设计模式。使用状态模式或命令模式来更好地管理状态转换和用户输入。那么还有哪些合适的很好的设计模式？</p>
+</li>
+</ol>
+<p>设计模式是软件工程中常用的解决特定问题的模板。在你的游戏中，我们可以使用状态模式来管理不同场景（状态）之间的转换，以及命令模式来封装玩家的操作。</p>
+<h3 id="状态模式"><a href="#状态模式" class="headerlink" title="状态模式"></a>状态模式</h3><p>状态模式允许一个对象在其内部状态改变时改变其行为。这似乎是通过改变其所属的类一样。对于游戏，我们可以为每个场景定义一个状态类，并在游戏上下文中切换状态。</p>
+<p>让我们看一个简化的例子，如何将状态模式应用于你的游戏场景管理中：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br></pre></td><td class="code"><pre><span class="line">java复制<span class="comment">// 游戏状态的接口</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">GameState</span> &#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">handleInput</span><span class="params">(String input)</span>;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">update</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 悬崖的状态</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CliffState</span> <span class="keyword">implements</span> <span class="title class_">GameState</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> GameContext context;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">CliffState</span><span class="params">(GameContext context)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.context = context;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">handleInput</span><span class="params">(String input)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (input.equals(<span class="string">&quot;前进&quot;</span>)) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;你掉下悬崖，死亡。游戏结束。&quot;</span>);</span><br><span class="line">            context.setState(<span class="literal">null</span>); <span class="comment">//游戏结束</span></span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (input.equals(<span class="string">&quot;后退&quot;</span>)) &#123;</span><br><span class="line">            context.setState(<span class="keyword">new</span> <span class="title class_">MonsterState</span>(context));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">update</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;你站在悬崖边。你前进还是后退？&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 怪物的状态</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MonsterState</span> <span class="keyword">implements</span> <span class="title class_">GameState</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> GameContext context;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MonsterState</span><span class="params">(GameContext context)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.context = context;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">handleInput</span><span class="params">(String input)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (input.equals(<span class="string">&quot;确认&quot;</span>)) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;小怪物是敌人！你死亡了。游戏结束。&quot;</span>);</span><br><span class="line">            context.setState(<span class="literal">null</span>); <span class="comment">//游戏结束</span></span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (input.equals(<span class="string">&quot;攻击&quot;</span>)) &#123;</span><br><span class="line">            <span class="comment">// 省略战斗逻辑...</span></span><br><span class="line">            context.setState(<span class="keyword">new</span> <span class="title class_">MysteryRoomState</span>(context)); <span class="comment">// 战斗胜利，进入下一个状态</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">update</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;你遇到了一只小怪物。你要确认还是攻击？&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 神秘房间的状态</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MysteryRoomState</span> <span class="keyword">implements</span> <span class="title class_">GameState</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> GameContext context;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MysteryRoomState</span><span class="params">(GameContext context)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.context = context;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">handleInput</span><span class="params">(String input)</span> &#123;</span><br><span class="line">        <span class="comment">// 根据输入处理逻辑</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">update</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;你进入了一个神秘的房间。&quot;</span>);</span><br><span class="line">        <span class="comment">// 随机生成敌人或其他事件...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 游戏上下文控制器</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">GameContext</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> GameState currentState;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">GameContext</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.currentState = <span class="keyword">new</span> <span class="title class_">CliffState</span>(<span class="built_in">this</span>); <span class="comment">// 开始时的状态</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setState</span><span class="params">(GameState state)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.currentState = state;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">handleInput</span><span class="params">(String input)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (currentState != <span class="literal">null</span>) &#123;</span><br><span class="line">            currentState.handleInput(input);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">update</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (currentState != <span class="literal">null</span>) &#123;</span><br><span class="line">            currentState.update();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 游戏主类</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Game</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">GameContext</span> <span class="variable">context</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">GameContext</span>();</span><br><span class="line">        context.update(); <span class="comment">// 显示初始提示</span></span><br><span class="line">        <span class="type">Scanner</span> <span class="variable">scanner</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">input</span> <span class="operator">=</span> scanner.nextLine();</span><br><span class="line">            context.handleInput(input);</span><br><span class="line">            context.update();</span><br><span class="line">            <span class="keyword">if</span> (context.currentState == <span class="literal">null</span>) &#123;</span><br><span class="line">                <span class="keyword">break</span>; <span class="comment">// 当无状态时，退出游戏循环</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        scanner.close();</span><br><span class="line">        System.out.println(<span class="string">&quot;游戏结束。&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中，每个游戏场景都有一个对应的状态类。游戏上下文<code>GameContext</code>控制当前游戏的状态，并且每个状态类知道接下来应该转换到哪个状态。这样，状态的转换逻辑就被封装在状态类中，游戏上下文只是简单地调用当前状态的方法。</p>
+<h3 id="命令模式"><a href="#命令模式" class="headerlink" title="命令模式"></a>命令模式</h3><p>命令模式是另一个行为设计模式，它将一个请求封装成一个对象，从而让你使用不同的请求、队列或日志请求来参数化其他对象。它同时也支持可撤销的操作。在游戏中，命令模式可以用来表示玩家的行为，如攻击、移动等。</p>
+<p>下面是一个简化的例子，如何使用命令模式来表示玩家命令：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">java复制<span class="comment">// 命令接口</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Command</span> &#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">execute</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 攻击命令</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AttackCommand</span> <span class="keyword">implements</span> <span class="title class_">Command</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> Player player;</span><br><span class="line">    <span class="keyword">private</span> Monster monster;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">AttackCommand</span><span class="params">(Player player, Monster monster)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.player = player;</span><br><span class="line">        <span class="built_in">this</span>.monster = monster;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">execute</span><span class="params">()</span> &#123;</span><br><span class="line">        player.attack(monster);</span><br><span class="line">        <span class="keyword">if</span> (monster.isDead()) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;怪物被击败了！&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 撤退命令</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RetreatCommand</span> <span class="keyword">implements</span> <span class="title class_">Command</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> Player player;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">RetreatCommand</span><span class="params">(Player player)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.player = player;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">execute</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;玩家撤退了！&quot;</span>);</span><br><span class="line">        <span class="comment">// 实现玩家撤退逻辑...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 玩家类</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Player</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">attack</span><span class="params">(Monster monster)</span> &#123;</span><br><span class="line">        <span class="comment">// 实现攻击逻辑...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 怪物类</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Monster</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isDead</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">// 实现怪物是否被击败的逻辑...</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中，<code>AttackCommand</code>和<code>RetreatCommand</code>是实现了<code>Command</code>接口的命令类。当玩家选择攻击或者撤退时，相应的命令对象被创建并执行，分别调用玩家或者怪物的方法。</p>
+<p>结合状态模式和命令模式，你可以创建一个灵活而强大的游戏控制系统，它将玩家的选择转换为命令对象，并在游戏的不同状态之间平滑过渡。这样做的好处是游戏逻辑清晰，易于维护和扩展。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://antarctica.github.io/2024/02/28/%E6%9A%B4%E5%8A%9B%E6%9E%9A%E4%B8%BE%E7%AE%97%E6%B3%95%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/people.jpg">
+      <meta itemprop="name" content="Antarctica">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Antarctica">
+      <meta itemprop="description" content="Antarctica Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Antarctica">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/02/28/%E6%9A%B4%E5%8A%9B%E6%9E%9A%E4%B8%BE%E7%AE%97%E6%B3%95%E9%A2%98/" class="post-title-link" itemprop="url">暴力枚举算法题</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-02-28 14:55:23" itemprop="dateCreated datePublished" datetime="2024-02-28T14:55:23+08:00">2024-02-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-02-29 15:32:34" itemprop="dateModified" datetime="2024-02-29T15:32:34+08:00">2024-02-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>前言：</strong>近期刷过的暴力枚举算法题的记录总结</p>
+<p><strong>常用方法：（DFS）</strong></p>
+<p>void dfs(控制参数)<br>{<br>    边界判断(递归出口)<br>    {<br>        到达边界时的操作<br>    }<br>    未到边界时尝试每一种可能else<br>    {<br>        满足条件 if<br>        {<br>            标记<br>            继续下一步 : dfs(step+1)（递归）<br>            恢复初始状态，回溯<br>        }<br>    };<br>}</p>
+<h4 id="1-统计方形（普及-）2-28"><a href="#1-统计方形（普及-）2-28" class="headerlink" title="1. 统计方形（普及-）2&#x2F;28"></a>1. 统计方形（普及-）2&#x2F;28</h4><p><strong>题目描述</strong><br>有一个 $n \times m$ 方格的棋盘，求其方格包含多少正方形、长方形（不包含正方形）。<br><strong>输入格式</strong><br>一行，两个正整数 $n,m$（$n \leq 5000,m \leq 5000$）。</p>
+<p>并不完全暴力，使用了排列组合的数学公式进行简化。其中WA了两次，都是因为忽略了m与n可能数据过大而造成的溢出。所以最好使用long的数据类型。<br>如果用暴力枚举来做的话，可以通过选取矩形的左上角和右下角的点来枚举所有的矩形。时间复杂度甚至达到O(n<sup>4</sup>)，好处是思想简单。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span>&#123;</span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line"> Scanner sc=<span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line"> <span class="comment">//输入</span></span><br><span class="line"> <span class="type">long</span> n=sc.nextInt();<span class="comment">//行数</span></span><br><span class="line"> <span class="type">long</span> m=sc.nextInt();<span class="comment">//列数</span></span><br><span class="line"> <span class="comment">//矩形计数(排列组合应用)</span></span><br><span class="line"> <span class="type">long</span> a=(n*(n+<span class="number">1</span>)/<span class="number">2</span>)*(m*(m+<span class="number">1</span>)/<span class="number">2</span>);</span><br><span class="line"> <span class="comment">//正方形计数</span></span><br><span class="line"> <span class="type">long</span> b=<span class="number">0</span>;</span><br><span class="line"> <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=Math.min(n,m);i++)&#123;</span><br><span class="line">     b+=(n-i+<span class="number">1</span>)*(m-i+<span class="number">1</span>);</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">//输出</span></span><br><span class="line"> System.out.print(b+<span class="string">&quot; &quot;</span>+(a-b));</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 暴力枚举所有可能的矩形</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> top=<span class="number">0</span>;top&lt;n;top++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> left=<span class="number">0</span>;left&lt;m;left++) &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> bottom=top+<span class="number">1</span>;bottom&lt;=n;bottom++) &#123;</span><br><span class="line">                    <span class="keyword">for</span> (<span class="type">int</span> right=left+<span class="number">1</span>;right&lt;=m;right++) &#123;</span><br><span class="line">                        <span class="keyword">if</span> (bottom-top==right-left) </span><br><span class="line">                            squares++;</span><br><span class="line">                        <span class="keyword">else</span> </span><br><span class="line">                            rectangles++;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-烤鸡（普及-）2-28"><a href="#2-烤鸡（普及-）2-28" class="headerlink" title="2. 烤鸡（普及-）2&#x2F;28"></a>2. 烤鸡（普及-）2&#x2F;28</h4><p><strong>题目描述：</strong><br>猪猪 Hanke 特别喜欢吃烤鸡（本是同畜牲，相煎何太急！）Hanke 吃鸡很特别，为什么特别呢？因为他有10种配料（芥末、孜然等），每种配料可以放1到3克，任意烤鸡的美味程度为所有配料质量之和。现在，Hanke 想要知道，如果给你一个美味程度 <em>n</em> ，请输出这10种配料的所有搭配方案。</p>
+<p>怀疑暴力，理解暴力，欣赏暴力，<del>成为暴力</del><br>可恶的是题目要求先输出方案再输出字典序的排列。这样我就不得不使用两次一摸一样的循环，除非想个办法存储一大堆字符串。好在<code>pow(3,10)=59049</code>，for多一点也问题不大。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span>&#123;</span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line"> Scanner sc=<span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line"> <span class="comment">//输入</span></span><br><span class="line"> <span class="type">long</span> n=sc.nextInt();</span><br><span class="line"> <span class="type">int</span> count=<span class="number">0</span>;</span><br><span class="line"> <span class="comment">//枚举(夺命十连for)</span></span><br><span class="line"> <span class="keyword">if</span>(n&lt;<span class="number">10</span>)&#123;</span><br><span class="line"> System.out.println(<span class="string">&quot;0&quot;</span>);</span><br><span class="line"> <span class="keyword">return</span>;&#125;</span><br><span class="line"> <span class="keyword">if</span>(n==<span class="number">10</span>)&#123;</span><br><span class="line"> System.out.println(<span class="string">&quot;1&quot;</span>);</span><br><span class="line"> System.out.println(<span class="string">&quot;1 1 1 1 1 1 1 1 1 1&quot;</span>);</span><br><span class="line"> <span class="keyword">return</span>;&#125;</span><br><span class="line"> <span class="keyword">for</span>(<span class="type">int</span> a=<span class="number">1</span>;a&lt;=<span class="number">3</span>;a++)&#123;</span><br><span class="line">  <span class="keyword">for</span>(<span class="type">int</span> b=<span class="number">1</span>;b&lt;=<span class="number">3</span>;b++)&#123;</span><br><span class="line">   <span class="keyword">for</span>(<span class="type">int</span> c=<span class="number">1</span>;c&lt;=<span class="number">3</span>;c++)&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> d=<span class="number">1</span>;d&lt;=<span class="number">3</span>;d++)&#123;</span><br><span class="line">     <span class="keyword">for</span>(<span class="type">int</span> e=<span class="number">1</span>;e&lt;=<span class="number">3</span>;e++)&#123;</span><br><span class="line">      <span class="keyword">for</span>(<span class="type">int</span> f=<span class="number">1</span>;f&lt;=<span class="number">3</span>;f++)&#123;</span><br><span class="line">       <span class="keyword">for</span>(<span class="type">int</span> g=<span class="number">1</span>;g&lt;=<span class="number">3</span>;g++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> h=<span class="number">1</span>;h&lt;=<span class="number">3</span>;h++)&#123;</span><br><span class="line">         <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=<span class="number">3</span>;i++)&#123;</span><br><span class="line">          <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>;j&lt;=<span class="number">3</span>;j++)&#123;</span><br><span class="line">           <span class="keyword">if</span>(a+b+c+d+e+f+g+h+i+j==n)</span><br><span class="line">            count++;</span><br><span class="line">          &#125;</span><br><span class="line">         &#125;</span><br><span class="line">        &#125;</span><br><span class="line">       &#125; </span><br><span class="line">      &#125;</span><br><span class="line">     &#125;</span><br><span class="line">    &#125;</span><br><span class="line">   &#125;</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> System.out.println(count);</span><br><span class="line"> <span class="keyword">for</span>(<span class="type">int</span> a=<span class="number">1</span>;a&lt;=<span class="number">3</span>;a++)&#123;</span><br><span class="line">  <span class="keyword">for</span>(<span class="type">int</span> b=<span class="number">1</span>;b&lt;=<span class="number">3</span>;b++)&#123;</span><br><span class="line">   <span class="keyword">for</span>(<span class="type">int</span> c=<span class="number">1</span>;c&lt;=<span class="number">3</span>;c++)&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> d=<span class="number">1</span>;d&lt;=<span class="number">3</span>;d++)&#123;</span><br><span class="line">     <span class="keyword">for</span>(<span class="type">int</span> e=<span class="number">1</span>;e&lt;=<span class="number">3</span>;e++)&#123;</span><br><span class="line">      <span class="keyword">for</span>(<span class="type">int</span> f=<span class="number">1</span>;f&lt;=<span class="number">3</span>;f++)&#123;</span><br><span class="line">       <span class="keyword">for</span>(<span class="type">int</span> g=<span class="number">1</span>;g&lt;=<span class="number">3</span>;g++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> h=<span class="number">1</span>;h&lt;=<span class="number">3</span>;h++)&#123;</span><br><span class="line">         <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=<span class="number">3</span>;i++)&#123;</span><br><span class="line">          <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>;j&lt;=<span class="number">3</span>;j++)&#123;</span><br><span class="line">           <span class="keyword">if</span>(a+b+c+d+e+f+g+h+i+j==n)&#123;</span><br><span class="line">            System.out.print(a+<span class="string">&quot; &quot;</span>+b+<span class="string">&quot; &quot;</span>+c+<span class="string">&quot; &quot;</span>+d+<span class="string">&quot; &quot;</span>+e+<span class="string">&quot; &quot;</span>+f+<span class="string">&quot; &quot;</span>+g+<span class="string">&quot; &quot;</span>+h+<span class="string">&quot; &quot;</span>+i+<span class="string">&quot; &quot;</span>+j);</span><br><span class="line">            System.out.println();</span><br><span class="line">            &#125;</span><br><span class="line">           &#125;</span><br><span class="line">          &#125;</span><br><span class="line">         &#125;</span><br><span class="line">        &#125; </span><br><span class="line">       &#125;</span><br><span class="line">      &#125;</span><br><span class="line">     &#125;</span><br><span class="line">    &#125;</span><br><span class="line">   &#125;</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;<span class="comment">//像滑滑梯一样好漂亮</span></span><br></pre></td></tr></table></figure>
+
+<p>正解是DFS。可扩展性、简洁性都会更强。不过就这题而言使用for当然是更快速更好的选择</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">MAX_DEPTH</span> <span class="operator">=</span> <span class="number">10</span>; <span class="comment">//10种配料</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Scanner</span> <span class="variable">sc</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">        <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> sc.nextInt();</span><br><span class="line">        <span class="comment">//特殊情况处理</span></span><br><span class="line">        <span class="keyword">if</span> (n &lt; <span class="number">10</span> || n &gt; <span class="number">30</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;0&quot;</span>); </span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        ArrayList&lt;Integer&gt; a = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();<span class="comment">//记录当前出现的组合</span></span><br><span class="line">        dfs(<span class="number">0</span>, n, a);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">dfs</span><span class="params">(<span class="type">int</span> depth, <span class="type">int</span> targetSum, ArrayList&lt;Integer&gt; a)</span> &#123;</span><br><span class="line">        <span class="comment">// 如果达到了10种配料，并且当前和等于目标和，打印组合</span></span><br><span class="line">        <span class="keyword">if</span> (depth == MAX_DEPTH) &#123;</span><br><span class="line">            <span class="keyword">if</span> (targetSum == <span class="number">0</span>) &#123; </span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; MAX_DEPTH; i++) &#123;</span><br><span class="line">                    System.out.print(a.get(i) + <span class="string">&quot; &quot;</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 对于每种配料可以放1到3克</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt;= <span class="number">3</span>; i++) &#123;</span><br><span class="line">            <span class="comment">// 只有当剩余的美味程度不小于i时，才能继续添加配料</span></span><br><span class="line">            <span class="keyword">if</span> (targetSum - i &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">                a.add(i); <span class="comment">// 添加配料</span></span><br><span class="line">                dfs(depth + <span class="number">1</span>, targetSum - i, a); <span class="comment">// 继续搜索下一种配料</span></span><br><span class="line">                a.remove(a.size() - <span class="number">1</span>); <span class="comment">// 回溯，移除最后添加的配料</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="comment">//对于递归一直很不熟练！多多复习！</span></span><br></pre></td></tr></table></figure>
+
+<p>这是递归函数中的一个常见模式：<br><strong>选择</strong>：将当前选项添加到路径中（<code>combination.add(i);</code>）。<br><strong>探索</strong>：继续递归探索下一个选项（<code>dfs(depth + 1, targetSum - i, combination);</code>）。<br><strong>撤销选择</strong>（回溯）：将当前选项从路径中移除（<code>combination.remove(combination.size() - 1);</code>）。<br>为什么需要回溯呢？让我们以一个简化的例子来说明。假设我们只有两种配料A和B，每种配料可以选择1到3克，我们希望找到总量为4克的所有配料组合。<br>一开始，我们选择了A的1克，然后我们需要探索B的所有可能性：</p>
+<ol>
+<li><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC" alt="$A = 1$"><em>A</em>&#x3D;1, <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC" alt="$B = 1$"><em>B</em>&#x3D;1（不合适，因为总和为2）</li>
+<li><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC" alt="$A = 1$"><em>A</em>&#x3D;1, <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC" alt="$B = 2$"><em>B</em>&#x3D;2（不合适，因为总和为3）</li>
+<li><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC" alt="$A = 1$"><em>A</em>&#x3D;1, <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC" alt="$B = 3$"><em>B</em>&#x3D;3（合适，因为总和为4）</li>
+</ol>
+<p>完成A为1克的所有可能性后，我们需要回溯，也就是撤销A为1克的选择，然后探索A为2克的所有可能性：</p>
+<ol>
+<li><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC" alt="$A = 2$"><em>A</em>&#x3D;2, <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC" alt="$B = 1$"><em>B</em>&#x3D;1（不合适，因为总和为3）</li>
+<li><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC" alt="$A = 2$"><em>A</em>&#x3D;2, <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC" alt="$B = 2$"><em>B</em>&#x3D;2（合适，因为总和为4）</li>
+</ol>
+<p>同理，我们也需要探索A为3克的情况。在每次探索完成后，我们都需要回溯到上一个状态，以便不遗漏任何可能的组合。如果不进行回溯，我们就不能穷举所有可能的组合，因为我们会遗失掉一些选择路径。</p>
+<h4 id="3-三连击（普及-）2-29"><a href="#3-三连击（普及-）2-29" class="headerlink" title="3. 三连击（普及-）2&#x2F;29"></a>3. 三连击（普及-）2&#x2F;29</h4><p><strong>题目描述</strong><br>将 $1, 2,\ldots, 9$ 共 $9$ 个数分成三组，分别组成三个三位数，且使这三个三位数的比例是 $A:B:C$，试求出所有满足条件的三个三位数，若无解，输出 <code>No!!!</code>。<br>保证 $A&lt;B&lt;C$。</p>
+<p>啊啊啊气死我了找了这么久的错误竟然是因为for循环没学扎实记错了！</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//b=1之后因为不满足b!=a的条件，所以直接不执行而且返回上一级</span></span><br><span class="line"><span class="comment">//而a又直接就重新开始=2，b=1才能过关。所以我就知道问题出在for里面。而我想要的是，不满足就继续++而非返回上一级</span></span><br><span class="line"><span class="comment">//所以应该使用continue</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> a=<span class="number">1</span>;a&lt;=<span class="number">9</span>;a++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> b=<span class="number">1</span>;b&lt;=<span class="number">9</span>&amp;&amp;b!=a;b++)&#123;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="comment">//虽然也不是什么好东西但是至少能过关</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">  <span class="type">Scanner</span> <span class="variable">sc</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">   <span class="type">int</span> <span class="variable">A</span> <span class="operator">=</span> sc.nextInt();</span><br><span class="line">   <span class="type">int</span> <span class="variable">B</span> <span class="operator">=</span> sc.nextInt();</span><br><span class="line">   <span class="type">int</span> <span class="variable">C</span> <span class="operator">=</span> sc.nextInt();</span><br><span class="line">   <span class="type">boolean</span> <span class="variable">found</span> <span class="operator">=</span> <span class="literal">false</span>;</span><br><span class="line">   <span class="comment">// 循环中判断并输出</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> <span class="number">1</span>; a &lt;= <span class="number">9</span>; a++) &#123;</span><br><span class="line">     <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">b</span> <span class="operator">=</span> <span class="number">1</span>; b &lt;= <span class="number">9</span>; b++) &#123;</span><br><span class="line">      <span class="keyword">if</span> (b == a) <span class="keyword">continue</span>;</span><br><span class="line">       <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">c</span> <span class="operator">=</span> <span class="number">1</span>; c &lt;= <span class="number">9</span>; c++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (c == a || c == b) <span class="keyword">continue</span>;</span><br><span class="line">         <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">d</span> <span class="operator">=</span> <span class="number">1</span>; d &lt;= <span class="number">9</span>; d++) &#123;</span><br><span class="line">          <span class="keyword">if</span> (d == a || d == b || d == c) <span class="keyword">continue</span>;</span><br><span class="line">           <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">e</span> <span class="operator">=</span> <span class="number">1</span>; e &lt;= <span class="number">9</span>; e++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (e == a || e == b || e == c || e == d) <span class="keyword">continue</span>;</span><br><span class="line">             <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">f</span> <span class="operator">=</span> <span class="number">1</span>; f &lt;= <span class="number">9</span>; f++) &#123;</span><br><span class="line">              <span class="keyword">if</span> (f == a || f == b || f == c || f == d || f == e) <span class="keyword">continue</span>;</span><br><span class="line">               <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">g</span> <span class="operator">=</span> <span class="number">1</span>; g &lt;= <span class="number">9</span>; g++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (g == a || g == b || g == c || g == d || g == e || g == f) <span class="keyword">continue</span>;</span><br><span class="line">                 <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">h</span> <span class="operator">=</span> <span class="number">1</span>; h &lt;= <span class="number">9</span>; h++) &#123;</span><br><span class="line">                  <span class="keyword">if</span> (h == a||h==b||h==c||h==d||h==e||h==f||h==g) <span class="keyword">continue</span>;</span><br><span class="line">                   <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt;= <span class="number">9</span>; i++) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (i==a||i==b||i==c||i==d||i==e||i==f||i==g||i==h) <span class="keyword">continue</span>;</span><br><span class="line">                     <span class="type">int</span> <span class="variable">num1</span> <span class="operator">=</span> a * <span class="number">100</span> + b * <span class="number">10</span> + c;</span><br><span class="line">                     <span class="type">int</span> <span class="variable">num2</span> <span class="operator">=</span> d * <span class="number">100</span> + e * <span class="number">10</span> + f;</span><br><span class="line">                     <span class="type">int</span> <span class="variable">num3</span> <span class="operator">=</span> g * <span class="number">100</span> + h * <span class="number">10</span> + i;</span><br><span class="line">                     <span class="keyword">if</span> (num1 * B == num2 * A &amp;&amp; num1 * C == num3 * A) &#123;</span><br><span class="line">                         found = <span class="literal">true</span>;</span><br><span class="line">                         System.out.println(num1 + <span class="string">&quot; &quot;</span> + num2 + <span class="string">&quot; &quot;</span> + num3);</span><br><span class="line">            &#125;</span><br><span class="line">           &#125;</span><br><span class="line">          &#125;</span><br><span class="line">         &#125;</span><br><span class="line">        &#125;</span><br><span class="line">       &#125;</span><br><span class="line">      &#125;</span><br><span class="line">     &#125;</span><br><span class="line">    &#125;</span><br><span class="line">   &#125;</span><br><span class="line">  <span class="keyword">if</span> (!found) &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;No!!!&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  sc.close();</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>很好的方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Scanner</span> <span class="variable">scanner</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">        <span class="type">int</span>[] a = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">10</span>];</span><br><span class="line">        <span class="type">int</span> b1,b2,b3,l,ans = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">k1</span> <span class="operator">=</span> scanner.nextInt();</span><br><span class="line">        <span class="type">int</span> <span class="variable">k2</span> <span class="operator">=</span> scanner.nextInt();</span><br><span class="line">        <span class="type">int</span> <span class="variable">k3</span> <span class="operator">=</span> scanner.nextInt();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">b</span> <span class="operator">=</span> <span class="number">1</span>; b &lt;= <span class="number">1000</span> / k3; ++b) &#123;</span><br><span class="line">            b1 = b * k1; </span><br><span class="line">            b2 = b * k2;</span><br><span class="line">            b3 = b * k3;          </span><br><span class="line">            <span class="keyword">if</span> (b2 &gt; <span class="number">999</span> || b3 &gt; <span class="number">999</span>) <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">c</span> <span class="operator">=</span> <span class="number">1</span>; c &lt;= <span class="number">3</span>; ++c) &#123;</span><br><span class="line">                a[b1 % <span class="number">10</span>]++;</span><br><span class="line">                b1 /= <span class="number">10</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">c</span> <span class="operator">=</span> <span class="number">1</span>; c &lt;= <span class="number">3</span>; ++c) &#123;</span><br><span class="line">                a[b2 % <span class="number">10</span>]++;</span><br><span class="line">                b2 /= <span class="number">10</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">c</span> <span class="operator">=</span> <span class="number">1</span>; c &lt;= <span class="number">3</span>; ++c) &#123;</span><br><span class="line">                a[b3 % <span class="number">10</span>]++;</span><br><span class="line">                b3 /= <span class="number">10</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">c</span> <span class="operator">=</span> <span class="number">1</span>; c &lt;= <span class="number">9</span>; ++c) &#123;</span><br><span class="line">                <span class="keyword">if</span> (a[c] != <span class="number">1</span>) &#123;</span><br><span class="line">                    l = <span class="number">1</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">c</span> <span class="operator">=</span> <span class="number">1</span>; c &lt;= <span class="number">9</span>; ++c) a[c] = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span> (l == <span class="number">0</span>) &#123;</span><br><span class="line">                System.out.println(b*k1+<span class="string">&quot; &quot;</span>+b*k2+<span class="string">&quot; &quot;</span>+b*k3);</span><br><span class="line">                ans++; </span><br><span class="line">            &#125; <span class="keyword">else</span> </span><br><span class="line">                l = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (ans == <span class="number">0</span>) System.out.println(<span class="string">&quot;No!!!&quot;</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-选数（普及-）2-29"><a href="#4-选数（普及-）2-29" class="headerlink" title="4. 选数（普及-）2&#x2F;29"></a>4. 选数（普及-）2&#x2F;29</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">int</span> count=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        Scanner sc=<span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">        <span class="type">int</span> n=sc.nextInt();</span><br><span class="line">        <span class="type">int</span> k=sc.nextInt();</span><br><span class="line">        <span class="type">int</span>[] a=<span class="keyword">new</span> <span class="title class_">int</span>[n];</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">            a[i]=sc.nextInt();</span><br><span class="line">        &#125;</span><br><span class="line">        dfs(a,k,<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">        System.out.println(count);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">dfs</span><span class="params">(<span class="type">int</span>[] a,<span class="type">int</span> k,<span class="type">int</span> sum,<span class="type">int</span> start)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(k==<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(isPrime(sum)) &#123;</span><br><span class="line">                count++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=start;i&lt;a.length;i++)&#123;</span><br><span class="line">            <span class="comment">//注意，不能传递k--，因为传了之后才开始减</span></span><br><span class="line">            dfs(a,k-<span class="number">1</span>,sum+a[i],i+<span class="number">1</span>);<span class="comment">//不降原则？！</span></span><br><span class="line">            <span class="comment">//return ;不能在for里面呀//回溯？</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">isPrime</span><span class="params">(<span class="type">int</span> a)</span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">2</span>;i&lt;=Math.sqrt(a);i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(a%i==<span class="number">0</span>)</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在深度优先搜索（DFS）中，“回溯”是指递归调用结束后，程序的执行状态返回到递归调用之前的状态。在您的代码中，这种行为已经隐式地发生了。每次递归调用 <code>dfs</code> 方法时，当前状态（包括当前的和 <code>sum</code> 和起始索引 <code>start</code>）都被压入调用栈。当递归调用完成时，程序的执行状态自然就“回溯”到了这些变量的之前状态。</p>
+<p>具体来说，在您的代码中，<code>dfs</code> 方法中的每一次递归调用都创建了一个新的执行上下文，其中包括了对应的 <code>k</code>、<code>sum</code> 和 <code>start</code> 的副本。当一个递归调用完成并返回时：</p>
+<ul>
+<li>变量 <code>k</code> 的值恢复到调用前的状态，因为 <code>k-1</code> 并没有改变当前递归层次中 <code>k</code> 的值。</li>
+<li>变量 <code>sum</code> 的值也恢复到调用前的状态，因为 <code>sum + a[i]</code> 是传递给下一个递归调用的，当前层次的 <code>sum</code> 并没有被改变。</li>
+<li>变量 <code>start</code> 的值同样恢复到了调用前的状态，因为每次递归都是传递了 <code>i+1</code>，而不是修改 <code>start</code> 本身。</li>
+</ul>
+<p>这个过程实际上已经包含了回溯算法的本质，即探索所有可能的解决方案，并在达到一定条件（如这里的 <code>k == 0</code>）时记录结果，然后返回到上一步，尝试其他可能的路径。</p>
+<p>所以，你的代码中虽然没有显式的“撤销”操作，但通过递归调用和局部变量的作用域机制，实现了回溯搜索的效果。</p>
+<p>在某些其他类型的 DFS 问题中，你可能会看到显式的回溯，例如，在递归之前选择一个元素（如放入一个数组），在递归之后撤销这个选择（如从数组中移除）。但在这个特定的问题中，由于你是计算和的值并检查它是否为素数，所以并不需要显式地撤销选择，因为每次递归调用都是基于不同的参数值。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -607,370 +1137,9 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://antarctica.github.io/2024/02/21/%E8%83%A1%E6%80%9D%E4%B9%B1%E6%83%B3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/people.jpg">
-      <meta itemprop="name" content="Antarctica">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Antarctica">
-      <meta itemprop="description" content="Antarctica Blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Antarctica">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/02/21/%E8%83%A1%E6%80%9D%E4%B9%B1%E6%83%B3/" class="post-title-link" itemprop="url">每日自省</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2024-02-21 20:30:24 / 修改时间：22:39:09" itemprop="dateCreated datePublished" datetime="2024-02-21T20:30:24+08:00">2024-02-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E4%B8%80%E4%BA%9B%E5%BA%9F%E8%AF%9D/" itemprop="url" rel="index"><span itemprop="name">一些废话</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h4 id="吾日三省吾身，吾日三看此文。"><a href="#吾日三省吾身，吾日三看此文。" class="headerlink" title="吾日三省吾身，吾日三看此文。"></a><mark><strong>吾日三省吾身，吾日三看此文。</strong></mark></h4><p>（知乎上看到的一段回答……比起那些太过优秀与聪慧的人的成功经历，果然还是要多看看普通人的回答更能警醒自己)</p>
-<p><strong>原文：那些整天忙碌的计算机大学生到底都在干什么？</strong></p>
-<p>自嘲一波，绝大多数时间在制造垃圾</p>
-<p>为什么这么说呢，事实上90%的时间里写出来的代码都是：<br><em>(小白90%的时间都在面向chatGPT编程)</em></p>
-<p>自娱自乐型代码：没有任何工程价值，绝大部分都是到处copy别人代码拼出来的，即使放github到倒闭也不会有人star
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/02/21/%E8%83%A1%E6%80%9D%E4%B9%B1%E6%83%B3/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://antarctica.github.io/2024/02/21/Typora%E5%AD%A6%E4%B9%A0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/people.jpg">
-      <meta itemprop="name" content="Antarctica">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Antarctica">
-      <meta itemprop="description" content="Antarctica Blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Antarctica">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/02/21/Typora%E5%AD%A6%E4%B9%A0/" class="post-title-link" itemprop="url">Typora基本操作(markdown语法)</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-02-21 13:33:22" itemprop="dateCreated datePublished" datetime="2024-02-21T13:33:22+08:00">2024-02-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-02-22 10:08:16" itemprop="dateModified" datetime="2024-02-22T10:08:16+08:00">2024-02-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><strong>前言：</strong>关于Typora的基本操作，包括标题、段落、文字显示、列表、区块等等。虽然有些常用功能可以选中之后右键选择实现，不过小白认为掌握一些较为全面的基本功还是需要的。小白会继续深入了解Typora，研究一些更为有趣的东西。</p>
-<h2 id="一、标题"><a href="#一、标题" class="headerlink" title="一、标题"></a>一、标题</h2><p><strong>语法：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># 一级标题 ## 二级标题 ### 三级标题</span><br></pre></td></tr></table></figure>
-
-<p><strong>快捷键：</strong>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/02/21/Typora%E5%AD%A6%E4%B9%A0/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://antarctica.github.io/2024/02/20/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/people.jpg">
-      <meta itemprop="name" content="Antarctica">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Antarctica">
-      <meta itemprop="description" content="Antarctica Blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Antarctica">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/02/20/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" class="post-title-link" itemprop="url">搭建个人博客</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-02-20 17:09:28" itemprop="dateCreated datePublished" datetime="2024-02-20T17:09:28+08:00">2024-02-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-02-22 19:49:18" itemprop="dateModified" datetime="2024-02-22T19:49:18+08:00">2024-02-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><strong>前言：</strong>小白将会在这里分享小白都能会的个人博客搭建方法。包括小白花了好多时间搜罗的一大堆杂七杂八的资料汇总，遇到的一系列麻烦问题与解决方法。希望能对另一个小白有帮助。（大佬也可以来欣赏一下小白的崩溃心路历程）</p>
-<p>当然，小白现在也不懂太多原理，但是小白会去学习。
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/02/20/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://antarctica.github.io/2024/02/20/Hello-World-0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/people.jpg">
-      <meta itemprop="name" content="Antarctica">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Antarctica">
-      <meta itemprop="description" content="Antarctica Blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Antarctica">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/02/20/Hello-World-0/" class="post-title-link" itemprop="url">Hello-World</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-02-20 17:04:36" itemprop="dateCreated datePublished" datetime="2024-02-20T17:04:36+08:00">2024-02-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-02-22 10:07:55" itemprop="dateModified" datetime="2024-02-22T10:07:55+08:00">2024-02-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E4%B8%80%E4%BA%9B%E5%BA%9F%E8%AF%9D/" itemprop="url" rel="index"><span itemprop="name">一些废话</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Hello World！这是一个小白的第一篇博客。虽然什么都不懂，查阅了好多乱七八糟的资料，花费了无数个小时，终于是勉勉强强搭建起来了。如果能看到这段话，那么是缘分使我们在这里相遇。你将见证一个小白慢慢成长的心路历程。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
 
 </div>
   </main>
