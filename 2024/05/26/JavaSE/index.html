@@ -21,19 +21,19 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"antarctica.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="第一阶段 基础语法1. 变量与运算符1.1 转义字符课堂练习123&#x2F;&#x2F;为什么用了两个\t才行?这怎么回事?&#x2F;&#x2F;明白了\t就是四个字符的长度 中文字符比数字字符要长一半所以不行System.out.println(&quot;书名\t作者\t价格\t销量\n三国\t罗贯中\t120\t\t1000&quot;);  1.2  “+”号的使用（字符串拼接）1234System.out.printl">
+    <meta name="description" content="javaSE基础学习笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Antarctica">
 <meta property="og:url" content="https://antarctica.github.io/2024/05/26/JavaSE/index.html">
 <meta property="og:site_name" content="Antarctica">
-<meta property="og:description" content="第一阶段 基础语法1. 变量与运算符1.1 转义字符课堂练习123&#x2F;&#x2F;为什么用了两个\t才行?这怎么回事?&#x2F;&#x2F;明白了\t就是四个字符的长度 中文字符比数字字符要长一半所以不行System.out.println(&quot;书名\t作者\t价格\t销量\n三国\t罗贯中\t120\t\t1000&quot;);  1.2  “+”号的使用（字符串拼接）1234System.out.printl">
+<meta property="og:description" content="javaSE基础学习笔记">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="c:/Users/%E5%90%B4%E4%BA%A6%E6%B6%B5/AppData/Roaming/Typora/typora-user-images/image-20240327121024092.png">
 <meta property="og:image" content="c:/Users/%E5%90%B4%E4%BA%A6%E6%B6%B5/AppData/Roaming/Typora/typora-user-images/image-20240327121238273.png">
 <meta property="og:image" content="c:/Users/%E5%90%B4%E4%BA%A6%E6%B6%B5/AppData/Roaming/Typora/typora-user-images/image-20240329091443572.png">
 <meta property="og:image" content="c:/Users/%E5%90%B4%E4%BA%A6%E6%B6%B5/AppData/Roaming/Typora/typora-user-images/image-20240401123231589.png">
 <meta property="article:published_time" content="2024-05-26T07:25:59.842Z">
-<meta property="article:modified_time" content="2024-05-16T03:09:19.259Z">
+<meta property="article:modified_time" content="2024-05-26T07:39:45.735Z">
 <meta property="article:author" content="Antarctica">
 <meta property="article:tag" content="Antarctica,Blog">
 <meta name="twitter:card" content="summary">
@@ -135,7 +135,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">12</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -206,15 +206,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2024-05-26 15:25:59" itemprop="dateCreated datePublished" datetime="2024-05-26T15:25:59+08:00">2024-05-26</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-05-16 11:09:19" itemprop="dateModified" datetime="2024-05-16T11:09:19+08:00">2024-05-16</time>
+      <time title="创建时间：2024-05-26 15:25:59 / 修改时间：15:39:45" itemprop="dateCreated datePublished" datetime="2024-05-26T15:25:59+08:00">2024-05-26</time>
     </span>
 
   
@@ -235,6 +229,7 @@
     
     <div class="post-body" itemprop="articleBody"><hr>
 <hr>
+<p>javaSE基础学习笔记<span id="more"></span></p>
 <h1 id="第一阶段-基础语法"><a href="#第一阶段-基础语法" class="headerlink" title="第一阶段 基础语法"></a>第一阶段 基础语法</h1><h2 id="1-变量与运算符"><a href="#1-变量与运算符" class="headerlink" title="1. 变量与运算符"></a>1. 变量与运算符</h2><h3 id="1-1-转义字符课堂练习"><a href="#1-1-转义字符课堂练习" class="headerlink" title="1.1 转义字符课堂练习"></a>1.1 转义字符课堂练习</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//为什么用了两个\t才行?这怎么回事?</span></span><br><span class="line"><span class="comment">//明白了\t就是四个字符的长度 中文字符比数字字符要长一半所以不行</span></span><br><span class="line">System.out.println(<span class="string">&quot;书名\t作者\t价格\t销量\n三国\t罗贯中\t120\t\t1000&quot;</span>);</span><br></pre></td></tr></table></figure>
 
 <h3 id="1-2-“-”号的使用（字符串拼接）"><a href="#1-2-“-”号的使用（字符串拼接）" class="headerlink" title="1.2  “+”号的使用（字符串拼接）"></a>1.2  “+”号的使用（字符串拼接）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(<span class="number">100</span>+<span class="number">98</span>);<span class="comment">//左右两边均为数值 做加法运算</span></span><br><span class="line">System.out.println(<span class="string">&quot;100&quot;</span>+<span class="number">98</span>);<span class="comment">//只要有一方是字符串 则拼接两方</span></span><br><span class="line">System.out.println(<span class="number">100</span>+<span class="number">3</span>+<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;hello&quot;</span>+<span class="number">100</span>+<span class="number">3</span>);</span><br></pre></td></tr></table></figure>
