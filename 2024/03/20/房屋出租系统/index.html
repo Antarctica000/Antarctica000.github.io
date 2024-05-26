@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/black/pace-theme-big-counter.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"antarctica.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="房屋出租系统项目一、项目需求 项目界面–主菜单 房屋列表 新增房源（姓名、电话、地址、月租、状态） 查找房源 删除房源 修改房源 退出系统">
+<meta property="og:type" content="article">
+<meta property="og:title" content="房屋出租系统">
+<meta property="og:url" content="https://antarctica.github.io/2024/03/20/%E6%88%BF%E5%B1%8B%E5%87%BA%E7%A7%9F%E7%B3%BB%E7%BB%9F/index.html">
+<meta property="og:site_name" content="Antarctica">
+<meta property="og:description" content="房屋出租系统项目一、项目需求 项目界面–主菜单 房屋列表 新增房源（姓名、电话、地址、月租、状态） 查找房源 删除房源 修改房源 退出系统">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-03-20T10:25:23.000Z">
+<meta property="article:modified_time" content="2024-05-26T08:15:33.122Z">
+<meta property="article:author" content="Antarctica">
+<meta property="article:tag" content="技术">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://antarctica.github.io/2024/03/20/%E6%88%BF%E5%B1%8B%E5%87%BA%E7%A7%9F%E7%B3%BB%E7%BB%9F/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://antarctica.github.io/2024/03/20/%E6%88%BF%E5%B1%8B%E5%87%BA%E7%A7%9F%E7%B3%BB%E7%BB%9F/","path":"2024/03/20/房屋出租系统/","title":"房屋出租系统"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>房屋出租系统 | Antarctica</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Antarctica</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Antarctica Blog</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%88%BF%E5%B1%8B%E5%87%BA%E7%A7%9F%E7%B3%BB%E7%BB%9F%E9%A1%B9%E7%9B%AE"><span class="nav-number">1.</span> <span class="nav-text">房屋出租系统项目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E9%A1%B9%E7%9B%AE%E9%9C%80%E6%B1%82"><span class="nav-number">1.0.1.</span> <span class="nav-text">一、项目需求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E9%A1%B9%E7%9B%AE%E6%A1%86%E6%9E%B6%E5%9B%BE-%E5%88%86%E5%B1%82%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.0.2.</span> <span class="nav-text">二、项目框架图(分层模式)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E4%BB%A3%E7%A0%81%E9%83%A8%E5%88%86"><span class="nav-number">1.0.3.</span> <span class="nav-text">三、代码部分</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Antarctica"
+      src="/images/people.jpg">
+  <p class="site-author-name" itemprop="name">Antarctica</p>
+  <div class="site-description" itemprop="description">Antarctica Blog</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Antarctica000" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Antarctica000" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://antarctica.github.io/2024/03/20/%E6%88%BF%E5%B1%8B%E5%87%BA%E7%A7%9F%E7%B3%BB%E7%BB%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/people.jpg">
+      <meta itemprop="name" content="Antarctica">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Antarctica">
+      <meta itemprop="description" content="Antarctica Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="房屋出租系统 | Antarctica">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          房屋出租系统
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-03-20 18:25:23" itemprop="dateCreated datePublished" datetime="2024-03-20T18:25:23+08:00">2024-03-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-05-26 16:15:33" itemprop="dateModified" datetime="2024-05-26T16:15:33+08:00">2024-05-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="房屋出租系统项目"><a href="#房屋出租系统项目" class="headerlink" title="房屋出租系统项目"></a>房屋出租系统项目</h1><h3 id="一、项目需求"><a href="#一、项目需求" class="headerlink" title="一、项目需求"></a>一、项目需求</h3><ol>
+<li>项目界面–主菜单</li>
+<li>房屋列表</li>
+<li>新增房源（姓名、电话、地址、月租、状态）</li>
+<li>查找房源</li>
+<li>删除房源</li>
+<li>修改房源</li>
+<li>退出系统<span id="more"></span></li>
+</ol>
+<h3 id="二、项目框架图-分层模式"><a href="#二、项目框架图-分层模式" class="headerlink" title="二、项目框架图(分层模式)"></a>二、项目框架图(分层模式)</h3><p><strong>HouseRentApp.java</strong><br>main(){&#x2F;&#x2F;程序入口<br>&#x2F;&#x2F;创建HouseView对象<br>&#x2F;&#x2F;调用该对象显示主菜单}</p>
+<p><strong>工具类</strong><br>完成获取用户各种输入</p>
+<p><strong>HouseView.java</strong> &lt;&#x3D;&gt; 类 [ 界面 ]<br>1.显示界面<br>2.接收用户输入<br>3.调用HouseService完成对房屋信息的各种操作</p>
+<p><strong>HouseService.java</strong> &lt;&#x3D;&gt; 类 [ 业务层 ]<br>1.响应HouseView的调用<br>2.完成对房屋信息的各种操作（crud）</p>
+<p><strong>House.java</strong> &lt;&#x3D;&gt; 类 [ domain &#x2F; model 数据层]<br>1.一个House对象表示一个房屋信息</p>
+<h3 id="三、代码部分"><a href="#三、代码部分" class="headerlink" title="三、代码部分"></a>三、代码部分</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//HouseRentApp启动类</span></span><br><span class="line"><span class="keyword">import</span> View.HouseView;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">HouseRentApp</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">//程序入口</span></span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">HouseView</span>().start();</span><br><span class="line">        System.out.println(<span class="string">&quot;=============你已退出系统=============&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Utiliy工具类</span></span><br><span class="line"><span class="keyword">package</span> Utils;</span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="comment">//工具类的作用:</span></span><br><span class="line"><span class="comment">//处理各种情况的用户输入，并且能够按照程序员的需求，得到用户的控制台输入。</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Utility</span> &#123;</span><br><span class="line">    <span class="comment">//静态属性。。。</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">Scanner</span> <span class="variable">scanner</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 功能：读取键盘输入的一个字符，如果直接按回车，则返回指定的默认值；否则返回输入的那个字符</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> defaultValue 指定的默认值</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 默认值或输入的字符</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">char</span> <span class="title function_">readChar</span><span class="params">(<span class="type">char</span> defaultValue)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> readKeyBoard(<span class="number">1</span>, <span class="literal">true</span>);<span class="comment">//要么是空字符串，要么是一个字符</span></span><br><span class="line">        <span class="keyword">return</span> (str.length() == <span class="number">0</span>) ? defaultValue : str.charAt(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 功能：读取键盘输入的整型，长度小于2位</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 整数</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">readInt</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">int</span> n;</span><br><span class="line">        <span class="keyword">for</span> (; ; ) &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> readKeyBoard(<span class="number">10</span>, <span class="literal">false</span>);<span class="comment">//一个整数，长度&lt;=10位</span></span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                n = Integer.parseInt(str);<span class="comment">//将字符串转换成整数</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (NumberFormatException e) &#123;</span><br><span class="line">                System.out.print(<span class="string">&quot;数字输入错误，请重新输入：&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> n;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 功能：读取键盘输入的 整数或默认值，如果直接回车，则返回默认值，否则返回输入的整数</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> defaultValue 指定的默认值</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 整数或默认值</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">readInt</span><span class="params">(<span class="type">int</span> defaultValue)</span> &#123;</span><br><span class="line">        <span class="type">int</span> n;</span><br><span class="line">        <span class="keyword">for</span> (; ; ) &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> readKeyBoard(<span class="number">10</span>, <span class="literal">true</span>);</span><br><span class="line">            <span class="keyword">if</span> (str.equals(<span class="string">&quot;&quot;</span>)) &#123;</span><br><span class="line">                <span class="keyword">return</span> defaultValue;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//异常处理...</span></span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                n = Integer.parseInt(str);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (NumberFormatException e) &#123;</span><br><span class="line">                System.out.print(<span class="string">&quot;数字输入错误，请重新输入：&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> n;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 功能：读取键盘输入的指定长度的字符串</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> limit 限制的长度</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 指定长度的字符串</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> String <span class="title function_">readString</span><span class="params">(<span class="type">int</span> limit)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> readKeyBoard(limit, <span class="literal">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 功能：读取键盘输入的指定长度的字符串或默认值，如果直接回车，返回默认值，否则返回字符串</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> limit        限制的长度</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> defaultValue 指定的默认值</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 指定长度的字符串</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> String <span class="title function_">readString</span><span class="params">(<span class="type">int</span> limit, String defaultValue)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> readKeyBoard(limit, <span class="literal">true</span>);</span><br><span class="line">        <span class="keyword">return</span> str.equals(<span class="string">&quot;&quot;</span>) ? defaultValue : str;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 功能：读取键盘输入的确认选项，Y或N</span></span><br><span class="line"><span class="comment">     * 将小的功能，封装到一个方法中.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> Y或N</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">char</span> <span class="title function_">readConfirmSelection</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;请输入你的选择(Y/N): 请小心选择&quot;</span>);</span><br><span class="line">        <span class="type">char</span> c;</span><br><span class="line">        <span class="keyword">for</span> (; ; ) &#123;<span class="comment">//无限循环</span></span><br><span class="line">            <span class="comment">//在这里，将接受到字符，转成了大写字母</span></span><br><span class="line">            <span class="comment">//y =&gt; Y n=&gt;N</span></span><br><span class="line">            <span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> readKeyBoard(<span class="number">1</span>, <span class="literal">false</span>).toUpperCase();</span><br><span class="line">            c = str.charAt(<span class="number">0</span>);</span><br><span class="line">            <span class="keyword">if</span> (c == <span class="string">&#x27;Y&#x27;</span> || c == <span class="string">&#x27;N&#x27;</span>) &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                System.out.print(<span class="string">&quot;选择错误，请重新输入：&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> c;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 功能： 读取一个字符串</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> limit       读取的长度</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> blankReturn 如果为true ,表示 可以读空字符串。</span></span><br><span class="line"><span class="comment">     *                    如果为false表示 不能读空字符串。</span></span><br><span class="line"><span class="comment">     *                    &lt;p&gt;</span></span><br><span class="line"><span class="comment">     *                    如果输入为空，或者输入大于limit的长度，就会提示重新输入。</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String <span class="title function_">readKeyBoard</span><span class="params">(<span class="type">int</span> limit, <span class="type">boolean</span> blankReturn)</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//定义了字符串</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">line</span> <span class="operator">=</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//scanner.hasNextLine() 判断有没有下一行</span></span><br><span class="line">        <span class="keyword">while</span> (scanner.hasNextLine()) &#123;</span><br><span class="line">            line = scanner.nextLine();<span class="comment">//读取这一行</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">//如果line.length=0, 即用户没有输入任何内容，直接回车</span></span><br><span class="line">            <span class="keyword">if</span> (line.length() == <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (blankReturn) <span class="keyword">return</span> line;<span class="comment">//如果blankReturn=true,可以返回空串</span></span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">continue</span>; <span class="comment">//如果blankReturn=false,不接受空串，必须输入内容</span></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//如果用户输入的内容大于了 limit，就提示重写输入</span></span><br><span class="line">            <span class="comment">//如果用户如的内容 &gt;0 &lt;= limit ,我就接受</span></span><br><span class="line">            <span class="keyword">if</span> (line.length() &lt; <span class="number">1</span> || line.length() &gt; limit) &#123;</span><br><span class="line">                System.out.print(<span class="string">&quot;输入长度（不能大于&quot;</span> + limit + <span class="string">&quot;）错误，请重新输入：&quot;</span>);</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> line;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//HouseView界面层</span></span><br><span class="line"><span class="keyword">package</span> View;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> Service.HouseService;</span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">HouseView</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">HouseService</span> <span class="variable">houseService</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HouseService</span>();</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">Scanner</span> <span class="variable">scanner</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">start</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">boolean</span> <span class="variable">running</span> <span class="operator">=</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">while</span> (running) &#123;</span><br><span class="line">            menu();</span><br><span class="line">            running = choice();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">menu</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;--------------房屋出租系统---------------&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;-              1新增房屋                -&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;-              2查找房屋                -&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;-              3删除房屋                -&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;-              4修改信息                -&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;-              5房屋列表                -&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;-              6退    出                -&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;-请输入你的选择:&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">choice</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">switch</span> (scanner.next()) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;1&quot;</span>:</span><br><span class="line">                houseService.addHouse();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;2&quot;</span>:</span><br><span class="line">                houseService.findHouse();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;3&quot;</span>:</span><br><span class="line">                houseService.deleteHouse();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;4&quot;</span>:</span><br><span class="line">                houseService.changeHouse();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;5&quot;</span>:</span><br><span class="line">                houseService.listHouse();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;6&quot;</span>:</span><br><span class="line">                <span class="keyword">return</span> houseService.exit();</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                System.out.println(<span class="string">&quot;无效操作,重新输入:&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//HouseService业务层</span></span><br><span class="line"><span class="keyword">package</span> Service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> Domain.House;</span><br><span class="line"><span class="keyword">import</span> Utils.Utility;</span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">HouseService</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">Scanner</span> <span class="variable">scanner</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> ArrayList&lt;House&gt; houses = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="comment">//新增房屋</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addHouse</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">//需要加入合理性判断</span></span><br><span class="line">        System.out.println(<span class="string">&quot;----------------添加房屋-----------------&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;输入id:&quot;</span>);</span><br><span class="line">        <span class="type">String</span> <span class="variable">id</span> <span class="operator">=</span> scanner.next();</span><br><span class="line">        System.out.println(<span class="string">&quot;输入姓名:&quot;</span>);</span><br><span class="line">        <span class="type">String</span> <span class="variable">name</span> <span class="operator">=</span> Utility.readString(<span class="number">8</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;输入电话:&quot;</span>);</span><br><span class="line">        <span class="type">String</span> <span class="variable">phone</span> <span class="operator">=</span> Utility.readString(<span class="number">11</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;输入地址:&quot;</span>);</span><br><span class="line">        <span class="type">String</span> <span class="variable">address</span> <span class="operator">=</span> scanner.next();</span><br><span class="line">        System.out.println(<span class="string">&quot;输入月租:&quot;</span>);</span><br><span class="line">        <span class="type">int</span> <span class="variable">pay</span> <span class="operator">=</span> Utility.readInt();</span><br><span class="line">        System.out.println(<span class="string">&quot;输入状态(未出租/已出租):&quot;</span>);</span><br><span class="line">        <span class="type">String</span> <span class="variable">status</span> <span class="operator">=</span> Utility.readString(<span class="number">3</span>);</span><br><span class="line">        <span class="type">House</span> <span class="variable">house</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">House</span>(id, name, phone, address, pay, status);</span><br><span class="line">        houses.add(house);</span><br><span class="line">        System.out.println(<span class="string">&quot;----------------添加完成-----------------&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//查找房屋</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">findHouse</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;----------------查找房屋-----------------&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;输入你要查找的房屋id:&quot;</span>);</span><br><span class="line">        findID(scanner.next());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//删除房屋</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">deleteHouse</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;----------------删除房屋-----------------&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;输入你要删除的房屋id:&quot;</span>);</span><br><span class="line">        <span class="type">int</span> <span class="variable">ID</span> <span class="operator">=</span> findID(scanner.next());</span><br><span class="line">        <span class="keyword">if</span> (ID == -<span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        System.out.println(<span class="string">&quot;确认是否删除:&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (isOK())</span><br><span class="line">            houses.remove(ID);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//修改信息</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">changeHouse</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;----------------修改信息-----------------&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;输入你要修改的房屋id:(-1退出)&quot;</span>);</span><br><span class="line">        String input=scanner.next();</span><br><span class="line">        <span class="keyword">if</span>(<span class="string">&quot;-1&quot;</span>.equals(input))</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">ID</span> <span class="operator">=</span> findID(input);</span><br><span class="line">        <span class="keyword">if</span> (ID == -<span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        System.out.println(<span class="string">&quot;确认是否修改:&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (isOK()) &#123;</span><br><span class="line">            <span class="type">House</span> <span class="variable">house</span> <span class="operator">=</span> houses.get(ID);</span><br><span class="line">            System.out.println(<span class="string">&quot;修改id:&quot;</span> + <span class="string">&quot;( &quot;</span> + house.getId() + <span class="string">&quot; )&quot;</span>);</span><br><span class="line">            house.setId(scanner.next());</span><br><span class="line">            System.out.println(<span class="string">&quot;修改姓名:&quot;</span> + <span class="string">&quot;( &quot;</span> + house.getName() + <span class="string">&quot; )&quot;</span>);</span><br><span class="line">            house.setName(Utility.readString(<span class="number">8</span>));</span><br><span class="line">            System.out.println(<span class="string">&quot;修改电话:&quot;</span> + <span class="string">&quot;( &quot;</span> + house.getPhone() + <span class="string">&quot; )&quot;</span>);</span><br><span class="line">            house.setPhone(Utility.readString(<span class="number">11</span>));</span><br><span class="line">            System.out.println(<span class="string">&quot;修改地址:&quot;</span> + <span class="string">&quot;( &quot;</span> + house.getAddress() + <span class="string">&quot; )&quot;</span>);</span><br><span class="line">            house.setAddress(scanner.next());</span><br><span class="line">            System.out.println(<span class="string">&quot;修改月租:&quot;</span> + <span class="string">&quot;( &quot;</span> + house.getRent() + <span class="string">&quot; )&quot;</span>);</span><br><span class="line">            house.setRent(Utility.readInt());</span><br><span class="line">            System.out.println(<span class="string">&quot;修改状态(未出租/已出租):&quot;</span> + <span class="string">&quot;( &quot;</span> + house.getStatus() + <span class="string">&quot; )&quot;</span>);</span><br><span class="line">            house.setStatus(Utility.readString(<span class="number">3</span>));</span><br><span class="line">            System.out.println(<span class="string">&quot;----------------修改完成-----------------&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//房屋列表</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">listHouse</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;----------------房屋列表-----------------&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (houses.isEmpty()) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;当前列表为空,请先添加&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (House house : houses) &#123;</span><br><span class="line">            System.out.println(house);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//退出</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">exit</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;----------------退    出-----------------&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;确认退出？&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> !isOK();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">///查找id并返回索引并显示房屋信息</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">findID</span><span class="params">(String ID)</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; houses.size(); i++) &#123;</span><br><span class="line">            <span class="type">House</span> <span class="variable">house</span> <span class="operator">=</span> houses.get(i);</span><br><span class="line">            <span class="keyword">if</span> (ID.equals(house.getId())) &#123;</span><br><span class="line">                System.out.println(house);</span><br><span class="line">                <span class="keyword">return</span> i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">&quot;当前ID不存在！&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">///用户确认输入</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isOK</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;输入你的选择y/n&quot;</span>);</span><br><span class="line">            <span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> scanner.next();</span><br><span class="line">            <span class="keyword">if</span> (<span class="string">&quot;y&quot;</span>.equals(s))</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">&quot;n&quot;</span>.equals(s))</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                System.out.println(<span class="string">&quot;输入不合规范&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//House数据层</span></span><br><span class="line"><span class="keyword">package</span> Domain;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">House</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String phone;</span><br><span class="line">    <span class="keyword">private</span> String address;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> rent;</span><br><span class="line">    <span class="keyword">private</span> String status;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">House</span><span class="params">()</span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">House</span><span class="params">(String id, String name, String phone, String address, <span class="type">int</span> pay, String status)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.id = id;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">        <span class="built_in">this</span>.phone = phone;</span><br><span class="line">        <span class="built_in">this</span>.address = address;</span><br><span class="line">        <span class="built_in">this</span>.rent = pay;</span><br><span class="line">        <span class="built_in">this</span>.status = status;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getName</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setName</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getPhone</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> phone;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setPhone</span><span class="params">(String phone)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.phone = phone;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getAddress</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> address;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setAddress</span><span class="params">(String address)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.address = address;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getRent</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> rent;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setRent</span><span class="params">(<span class="type">int</span> rent)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.rent = rent;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getStatus</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> status;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setStatus</span><span class="params">(String status)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.status = status;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getId</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setId</span><span class="params">(String id)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.id = id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span>  id +</span><br><span class="line">                <span class="string">&quot;\t&quot;</span>+ name +</span><br><span class="line">                <span class="string">&quot;\t&quot;</span>+ phone +</span><br><span class="line">                <span class="string">&quot;\t&quot;</span>+ address +</span><br><span class="line">                <span class="string">&quot;\t&quot;</span>+ rent +</span><br><span class="line">                <span class="string">&quot;\t&quot;</span>+ status ;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag"># 技术</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/03/05/%E9%9B%B6%E9%92%B1%E9%80%9A/" rel="prev" title="简易零钱通项目">
+                  <i class="fa fa-angle-left"></i> 简易零钱通项目
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/04/15/%E5%9D%A6%E5%85%8B%E5%A4%A7%E6%88%98(%E6%97%A7)/" rel="next" title="坦克大战游戏1.0">
+                  坦克大战游戏1.0 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC81OTU0My8zNjAwNQ=="></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Antarctica</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script src="/js/third-party/comments/livere.js"></script>
+
+</body>
+</html>
