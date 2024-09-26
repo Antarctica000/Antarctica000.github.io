@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/black/pace-theme-big-counter.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"antarctica.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Linux+shell脚本前言：断断续续东学一点西学一点，命令也总是搞错，决定系统性梳理一遍，记录常用指令与一些蠢问题，等操作系统学完后再来过一遍，尝试深入理解linux，研究内核。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux">
+<meta property="og:url" content="https://antarctica.github.io/2024/09/26/Linux/index.html">
+<meta property="og:site_name" content="Antarctica">
+<meta property="og:description" content="Linux+shell脚本前言：断断续续东学一点西学一点，命令也总是搞错，决定系统性梳理一遍，记录常用指令与一些蠢问题，等操作系统学完后再来过一遍，尝试深入理解linux，研究内核。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://antarctica.github.io/images/linux_1.1.png">
+<meta property="article:published_time" content="2024-09-26T02:51:11.000Z">
+<meta property="article:modified_time" content="2024-09-26T14:51:50.582Z">
+<meta property="article:author" content="Antarctica">
+<meta property="article:tag" content="技术">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://antarctica.github.io/images/linux_1.1.png">
+
+
+<link rel="canonical" href="https://antarctica.github.io/2024/09/26/Linux/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://antarctica.github.io/2024/09/26/Linux/","path":"2024/09/26/Linux/","title":"Linux"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Linux | Antarctica</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Antarctica</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Antarctica Blog</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux-shell%E8%84%9A%E6%9C%AC"><span class="nav-number">1.</span> <span class="nav-text">Linux+shell脚本</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86"><span class="nav-number">1.0.1.</span> <span class="nav-text">一、前置知识</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1%E3%80%81VMware%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">1、VMware网络连接三种方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2%E3%80%81%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%85%8B%E9%9A%86"><span class="nav-number">1.0.1.2.</span> <span class="nav-text">2、虚拟机克隆</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3%E3%80%81%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%BF%AB%E7%85%A7"><span class="nav-number">1.0.1.3.</span> <span class="nav-text">3、虚拟机快照</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4%E3%80%81%E5%AE%89%E8%A3%85vmtools"><span class="nav-number">1.0.1.4.</span> <span class="nav-text">4、安装vmtools</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5%E3%80%81%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="nav-number">1.0.1.5.</span> <span class="nav-text">5、目录结构</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81Linux%E5%AE%9E%E6%93%8D"><span class="nav-number">1.0.2.</span> <span class="nav-text">二、Linux实操</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1%E3%80%81%E8%BF%9C%E7%A8%8B%E7%99%BB%E9%99%86-%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93"><span class="nav-number">1.0.2.1.</span> <span class="nav-text">1、远程登陆&#x2F;文件传输</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2%E3%80%81VIM"><span class="nav-number">1.0.2.2.</span> <span class="nav-text">2、VIM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3%E3%80%81%E5%85%B3%E6%9C%BA-%E9%87%8D%E5%90%AF-%E7%94%A8%E6%88%B7%E7%99%BB%E9%99%86%E6%B3%A8%E9%94%80"><span class="nav-number">1.0.2.3.</span> <span class="nav-text">3、关机&#x2F;重启&#x2F;用户登陆注销</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4%E3%80%81%E6%8C%87%E5%AE%9A%E8%BF%90%E8%A1%8C%E7%BA%A7%E5%88%AB%EF%BC%887%E4%B8%AA%E7%BA%A7%E5%88%AB%EF%BC%89"><span class="nav-number">1.0.2.4.</span> <span class="nav-text">4、指定运行级别（7个级别）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-%E5%B8%AE%E5%8A%A9%E6%8C%87%E4%BB%A4"><span class="nav-number">1.0.2.5.</span> <span class="nav-text">5. 帮助指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%B1%BB%E6%8C%87%E4%BB%A4"><span class="nav-number">1.0.2.6.</span> <span class="nav-text">6. 文件目录类指令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#6-1-%E6%96%87%E4%BB%B6%E5%89%AA%E8%B4%B4%E5%88%A0%E9%99%A4%E5%A4%8D%E5%88%B6%E9%87%8D%E5%90%8D%E7%AD%89"><span class="nav-number">1.0.2.6.1.</span> <span class="nav-text">6.1 文件剪贴删除复制重名等</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-2-%E6%96%87%E4%BB%B6%E6%9F%A5%E7%9C%8B"><span class="nav-number">1.0.2.6.2.</span> <span class="nav-text">6.2 文件查看</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-3-%E6%97%B6%E9%97%B4%E5%92%8C%E6%97%A5%E6%9C%9F"><span class="nav-number">1.0.2.6.3.</span> <span class="nav-text">6.3 时间和日期</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-4-%E6%90%9C%E7%B4%A2%E6%9F%A5%E6%89%BE%E7%B1%BB"><span class="nav-number">1.0.2.6.4.</span> <span class="nav-text">6.4 搜索查找类</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-5-%E5%8E%8B%E7%BC%A9%E5%92%8C%E8%A7%A3%E5%8E%8B%E7%B1%BB"><span class="nav-number">1.0.2.6.5.</span> <span class="nav-text">6.5 压缩和解压类</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Antarctica"
+      src="/images/people.jpg">
+  <p class="site-author-name" itemprop="name">Antarctica</p>
+  <div class="site-description" itemprop="description">Antarctica Blog</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Antarctica000" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Antarctica000" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://antarctica.github.io/2024/09/26/Linux/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/people.jpg">
+      <meta itemprop="name" content="Antarctica">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Antarctica">
+      <meta itemprop="description" content="Antarctica Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Linux | Antarctica">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Linux
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-09-26 10:51:11 / 修改时间：22:51:50" itemprop="dateCreated datePublished" datetime="2024-09-26T10:51:11+08:00">2024-09-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="Linux-shell脚本"><a href="#Linux-shell脚本" class="headerlink" title="Linux+shell脚本"></a>Linux+shell脚本</h1><p><strong>前言：</strong>断断续续东学一点西学一点，命令也总是搞错，决定系统性梳理一遍，记录常用指令与一些蠢问题，等操作系统学完后再来过一遍，尝试深入理解linux，研究内核。</p>
+<span id="more"></span>
+
+<h3 id="一、前置知识"><a href="#一、前置知识" class="headerlink" title="一、前置知识"></a>一、前置知识</h3><h4 id="1、VMware网络连接三种方式"><a href="#1、VMware网络连接三种方式" class="headerlink" title="1、VMware网络连接三种方式"></a>1、VMware网络连接三种方式</h4><p><img src="/../images/linux_1.1.png" alt="linux_1.1"></p>
+<p><strong>桥接模式：</strong>虚拟机直连外部物理网络，可以互相通讯，但是容易IP冲突，且不够安全<br><strong>NAT模式：</strong>虚拟机和主机构建一个专用网络，并通过NAT设备对IP进行转换。虚拟机通过共享主机IP可以访问外部网络，但外部网络无法访问虚拟机。<br>安全且不冲突。我现在采用的也是这种模式。<br><strong>仅主机模式：</strong>虚拟机只与主机共享一个专用网络，与外部网络无法通信。</p>
+<p><strong>疑惑：</strong>虚拟机ping主机时能成功，但是主机ping虚拟机时 ”请求超时“ ？<br><strong>解决：</strong>更改了centos的网络配置文件，修改静态IP，且主机中虚拟网卡VMware8的IP地址由自动更换为手动定义，同虚拟机的ip地址在同一网段，同时也关闭了主机防火墙，遂成功。</p>
+<p>然后学会了ssh远程登陆。<br>虽然会用，但是原理还是懵懵懂懂。果然还是要好好等学完计网才能真正理解。</p>
+<h4 id="2、虚拟机克隆"><a href="#2、虚拟机克隆" class="headerlink" title="2、虚拟机克隆"></a>2、虚拟机克隆</h4><p>可以当作一份文件一样，克隆到别的地方 或者是别人的电脑上。克隆时需关机。</p>
+<h4 id="3、虚拟机快照"><a href="#3、虚拟机快照" class="headerlink" title="3、虚拟机快照"></a>3、虚拟机快照</h4><p>拍摄快照，便于迅速回到更改前的状态。</p>
+<p><strong>疑惑：</strong>物理的操作系统例如现在这台电脑上的windows怎么没有这样的快照功能？<br><strong>GPT：</strong>虚拟机快照的灵活性和效率主要得益于虚拟化架构的设计，而物理系统则更依赖于传统的备份和恢复机制。虚拟机是基于虚拟化技术构建的，允许在同一物理硬件上运行多个操作系统实例。虚拟化软件（如VMware）能够直接管理和控制虚拟机的状态，包括创建快照。这些快照记录了虚拟机的完整状态（包括内存、处理器状态和硬盘）。在物理机器上，操作系统直接与硬件交互，而没有中间的虚拟化层。因此，操作系统无法像虚拟化环境那样封装和管理整个系统的状态。<br><strong>思考：</strong>总是就是，虚拟机毕竟是个软件，因为全部东西都是这个软件模拟出来的，所以它也可以掌控一切。但是物理操作系统就不一样且更复杂，所以没有快照功能。</p>
+<h4 id="4、安装vmtools"><a href="#4、安装vmtools" class="headerlink" title="4、安装vmtools"></a>4、安装vmtools</h4><p><strong>疑惑：</strong>奇怪，我明明没有去安装，且输入查询服务状态等命令时，也显示找不到对应服务，但是我的文件可以直接在主机和虚拟机之间拖拽，也可以复制粘贴，是否说明我是可以有这个功能？暂且不搞，往后面看看再说。<br><strong>疑惑2.0：</strong>为什么我“未能挂起虚拟机”？记得解决这个问题。</p>
+<h4 id="5、目录结构"><a href="#5、目录结构" class="headerlink" title="5、目录结构"></a>5、目录结构</h4><p><strong>&#x2F;：</strong><code>Root Directory</code> 所有文件和目录的起点（房门）<br><strong>&#x2F;usr：</strong><code>User System Resources</code>存放用户程序和数据的地方 类似于program files（公共图书馆）<br><strong>&#x2F;etc：</strong><code>Etcetera</code>存放系统配置文件的地方（规划图和规则手册）<br><strong>&#x2F;boot：</strong><code>Boot Loader Files</code>存放启动linux时使用的一些核心文件 包括一些连接文件及镜像文件（启动汽车的钥匙和仪表盘）<br><strong>&#x2F;dev：</strong><code>Device Files</code>存放设备文件 代表系统中的硬件设备 如硬盘 终端等 类似于Windows的设备管理器（电器控制面板）<br><strong>&#x2F;var：</strong><code>Variable Data</code>存放可变数据（如日志文件、邮件等）的地方（仓库）<br><strong>&#x2F;mnt：</strong><code>Mount Directory</code>用于临时挂载文件系统的地方 通常用于管理员手动挂载文件系统（临时存放区）<br><strong>&#x2F;bin：</strong><code>Binary Executables</code> 存放系统启动和运行时需要的基本命令和工具 例如 <code>ls</code>, <code>cp</code> （厨房里的常用工具）<br><strong>&#x2F;sbin：</strong><code>System Binary Executables</code>存放系统管理命令的地方 这些命令通常只供管理员使用（专业工具房）<br><strong>&#x2F;home：</strong><code>Home Directories</code>存放用户个人文件的地方 每个用户都有自己的子目录（居民区）<br><strong>&#x2F;lib：</strong><code>Library Files</code>存放系统库文件 这些文件是运行程序时所需的共享库（工具库）<br><strong>&#x2F;media：</strong><code>Media Mount Points</code>挂载可移动媒体的地方 比如 USB 驱动器和光盘（停车场）<br><strong>&#x2F;opt：</strong><code>Optional Application Software</code>用于安装附加软件包的地方 通常是第三方软件（购物中心）<br><strong>&#x2F;proc：</strong><code>Process Information</code>虚拟文件系统 提供有关内核和进程的信息（实时检测仪）<br><strong>&#x2F;srv：</strong><code>Service Data</code>存放服务数据的地方 供系统提供特定服务时使用（服务中心）<br><strong>&#x2F;root：</strong><code>Root User&#39;s Home DirectoryRoot</code>超级用户（root 用户）的主目录（主人房间）<br><strong>&#x2F;tmp：</strong><code>Temporary Files</code>存放临时文件的地方（临时工作台）</p>
+<h3 id="二、Linux实操"><a href="#二、Linux实操" class="headerlink" title="二、Linux实操"></a>二、Linux实操</h3><h4 id="1、远程登陆-文件传输"><a href="#1、远程登陆-文件传输" class="headerlink" title="1、远程登陆&#x2F;文件传输"></a>1、远程登陆&#x2F;文件传输</h4><h4 id="2、VIM"><a href="#2、VIM" class="headerlink" title="2、VIM"></a>2、VIM</h4><p>MIT - Missing-Semester略有听讲，有些基础。这个课也是听一半丢一半。抽时间全听了。<br>vim三个状态切换，基本指令会使用，不过掌握得还不够熟练，不够深刻。<br>这个命令就不记录了，用熟即可。</p>
+<p><strong>疑惑：</strong>为什么物理windows系统安装软件等要从官网上下载压缩包，但是linux只需要短短几行命令就搞定了？<br><strong>GPT：</strong>在物理的 Windows 系统中，安装 JDK 需要下载和运行安装程序，这是因为 Windows 的软件管理方式与 Linux 有很大不同。而在 Linux 上，借助强大的包管理工具，用户可以通过简单的命令快速安装软件，自动处理依赖关系，省去了许多手动操作的步骤。这种设计理念使得 Linux 特别适合开发和服务器环境的使用。<br><strong>疑惑2.0：</strong>具体是怎么做到的？我要去学好操作系统 细细阅读linux的源码，体会它的强大</p>
+<h4 id="3、关机-重启-用户登陆注销"><a href="#3、关机-重启-用户登陆注销" class="headerlink" title="3、关机&#x2F;重启&#x2F;用户登陆注销"></a>3、关机&#x2F;重启&#x2F;用户登陆注销</h4><p><strong>shutdown</strong></p>
+<ul>
+<li><code>shutdown -h now</code>：表示立即关机</li>
+<li><code>shutdown -h 1</code>：表示1分钟后关机（后悔还可-c立即停止）</li>
+<li><code>shutdown -r now</code>：立即重启</li>
+</ul>
+<p><strong>halt</strong>：关机</p>
+<p><strong>reboot：</strong> 重启系统</p>
+<p><strong>sync：</strong>把内存的数据同步到磁盘上<br>当关机或者重启时，都应该先执行一下sync，防止数据丢失。<br><strong>疑惑：</strong>为什么要这样做？为什么会丢失？<br><strong>回答：</strong>（linux机制是预先读取，延迟写入，所以直接关机等会造成内存还没来得及写入）</p>
+<p><strong>logout：</strong>注销用户（在图形运行级别无效，在运行级别3有效。）</p>
+<h4 id="4、指定运行级别（7个级别）"><a href="#4、指定运行级别（7个级别）" class="headerlink" title="4、指定运行级别（7个级别）"></a>4、指定运行级别（7个级别）</h4><ul>
+<li>0.关机</li>
+<li>1.单用户【找回丢失密码】</li>
+<li>2.多用户状态没有网络服务</li>
+<li>3.多用户状态有网络服务</li>
+<li>4.系统未使用保留给用户</li>
+<li>5.图形界面</li>
+<li>6.系统重启</li>
+</ul>
+<h4 id="5-帮助指令"><a href="#5-帮助指令" class="headerlink" title="5. 帮助指令"></a>5. 帮助指令</h4><ul>
+<li><p>man（例如man ls）</p>
+</li>
+<li><p>help [命令或配置文件]</p>
+</li>
+</ul>
+<h4 id="6-文件目录类指令"><a href="#6-文件目录类指令" class="headerlink" title="6. 文件目录类指令"></a>6. 文件目录类指令</h4><h5 id="6-1-文件剪贴删除复制重名等"><a href="#6-1-文件剪贴删除复制重名等" class="headerlink" title="6.1 文件剪贴删除复制重名等"></a>6.1 文件剪贴删除复制重名等</h5><ul>
+<li>pwd：Print Working Directory，显示当前工作目录的绝对路径。</li>
+<li>ls：-a：显示当前目录所有的文件和目录，包括隐藏的；<ul>
+<li>-l：以列表的方式显示信息。</li>
+</ul>
+</li>
+<li>cd：cd ~：回到自己的家目录；cd …：回到当前目录的上一级目录。</li>
+<li>mkdir：创建目录；-p：创建多级目录。</li>
+<li>rmdir：删除空目录。rmdir不能删除非空的目录。如果需要删除非空的目录，需要使用rm -rf。</li>
+<li>cp：拷贝文件到指定目录；<ul>
+<li>-r：递归复制整个文件夹。强制覆盖不提示的方法：</li>
+<li>cp命令改为\cp</li>
+</ul>
+</li>
+<li>rm：移除文件或目录；<ul>
+<li>-r：递归删除整个文件夹；</li>
+<li>-f：强制删除不提示。</li>
+</ul>
+</li>
+<li>mv：移动文件与目录或重命名，两种功能！</li>
+<li>touch：创建空文件。可以一次性创建多个文件</li>
+<li>ln 给文件创建一个软连接</li>
+</ul>
+<h5 id="6-2-文件查看"><a href="#6-2-文件查看" class="headerlink" title="6.2 文件查看"></a>6.2 文件查看</h5><ul>
+<li>cat：查看文件内容。只能浏览文件，而不能修改文件。<ul>
+<li>-n：显示行号。</li>
+<li>结尾加上 | more：分页显示，不会全部一下显示完。</li>
+</ul>
+</li>
+<li>more：是一个基于VI编辑器的文本过滤器，它以全屏幕的方式按页显示文本文件的内容。more还内置了很多快捷键：<ul>
+<li>空白键（Space）：向下翻一页</li>
+<li>Enter：向下翻一行</li>
+<li>q：立刻离开more，不再显示该文件内容</li>
+<li>Ctrl + F：向下滚动一屏</li>
+<li>Ctrl + B：返回上一屏</li>
+<li>&#x3D; :输出当前行的行号</li>
+<li>:f 输出文件名和当前行的行号</li>
+</ul>
+</li>
+<li>less：用来分屏查看文件内容，与more相似，但是更强大，支持各种显示终端。less指令在显示文件内容时，并不是一次将整个文件加载之后才显示，而是根据显示需要加载内容。对于显示大型文件具有较高的效率。</li>
+<li>head：显示文件的开头部分。-n 5：看前面5行内容。</li>
+<li>tail：输出文件中尾部的内容。<ul>
+<li>-n 5：看后面5行内容。</li>
+<li>-f：时事追踪该文档的所有更新</li>
+</ul>
+</li>
+<li>&gt;指令：输出重定向。如果不存在会创建文件，否则会将原来的文件内容覆盖。</li>
+<li>&gt;&gt;指令：追加。如果不存在会创建文件，否则不会覆盖原来的文件内容，而是追加到文件的尾部。</li>
+<li>echo：输出内容到控制台。</li>
+<li>history：查看历史指令</li>
+</ul>
+<h5 id="6-3-时间和日期"><a href="#6-3-时间和日期" class="headerlink" title="6.3 时间和日期"></a>6.3 时间和日期</h5><ul>
+<li>date：显示当前日期和时间<ul>
+<li>date “+%Y”：显示当前年份</li>
+<li>date “+%d”：显示当前月份</li>
+<li>date “+%Y-%m-%d %H:%M:%S”：显示年-月-日 时：分：秒</li>
+<li>设置日期：date -s 字符串时间</li>
+</ul>
+</li>
+<li>cal：查看日历指令；<ul>
+<li>cal [月] [年份]：显示某一年或月的日历</li>
+</ul>
+</li>
+</ul>
+<h5 id="6-4-搜索查找类"><a href="#6-4-搜索查找类" class="headerlink" title="6.4 搜索查找类"></a>6.4 搜索查找类</h5><ul>
+<li>find：从指定目录向下递归的遍历其各个子目录，将满足条件的文件或者目录显示在终端。<ul>
+<li>find (搜索范围) -name (文件名)：按照指定的文件名查找模式查找文件。</li>
+<li>find (搜索范围) -user (用户名)：按照指定的用户名查找模式查找文件。</li>
+<li>find (搜索范围) -size (+多少&#x2F;-多少&#x2F;多少)：按照指定的文件大小查找模式查找文件（大于多少&#x2F;小于多少&#x2F;等于多少）</li>
+<li>查询 &#x2F;目录下所有.txt的文件：find &#x2F; -name *.txt</li>
+</ul>
+</li>
+<li>locate：locate (搜索文件)<ul>
+<li>可以快速定位文件路径。locate指令利用事先建立的系统中所有文件名称及路径的locate数据库实现快速定位给定的文件。</li>
+<li>locate指令无需遍历整个文件系统，查询速度较快。为了保证查询结果的准确度，管理员必须定期更新locate时刻。</li>
+<li>在第一次运行之前，必须使用updatedb指令创建locate数据库。</li>
+</ul>
+</li>
+<li>grep：过滤查找，表示将前一个命令的处理结果输出传递给后面的命令处理。经常跟管道一起使用。<ul>
+<li>grep [选项] 查找内容 源文件</li>
+<li>-n：显示匹配行及行号。</li>
+<li>-i：忽略大小写字母。</li>
+<li>cat hello.txt | grep yes</li>
+</ul>
+</li>
+</ul>
+<h5 id="6-5-压缩和解压类"><a href="#6-5-压缩和解压类" class="headerlink" title="6.5 压缩和解压类"></a>6.5 压缩和解压类</h5><ul>
+<li>gzip&#x2F;gunzip：压缩文件&#x2F;解压<ul>
+<li>gzip (文件)：压缩为.gz文件，原来文件不保留。</li>
+<li>gunzip (文件)：解压缩，同样也不保留源文件。</li>
+</ul>
+</li>
+<li>zip&#x2F;unzip：压缩文件&#x2F;解压<ul>
+<li>zip [选项] (压缩后文件xxx.zip) (将要压缩的文件)</li>
+<li>unzip [选项] (要解压的文件xxx.zip)</li>
+<li>zip -r：递归压缩，即压缩目录</li>
+<li>unzip -d (目录)：指定解压后的文件的存放目录</li>
+</ul>
+</li>
+<li>tar：打包指令，最后打包后的文件是.tar.gz的文件<ul>
+<li>tar [选项] xxx.tar.gz (打包的内容)</li>
+<li>-c：产生.tar打包文件</li>
+<li>-v：显示详细信息</li>
+<li>-f：指定压缩后的文件名</li>
+<li>-z：打包同时压缩</li>
+<li>-x：解压.tar文件</li>
+<li>压缩：tar -zcvf (压缩后文件名) (要压缩的文件)</li>
+<li>解压：tar -zxvf (要解压的文件)</li>
+<li>解压到指定目录：tar -zxvf (要解压的文件) -C (指定目录)，指定解压到的目录要存在。</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag"># 技术</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/09/18/%E4%B8%AD%E5%8C%97%E5%A4%A7%E5%AD%A6%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" rel="prev" title="中北大学管理系统">
+                  <i class="fa fa-angle-left"></i> 中北大学管理系统
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC81OTU0My8zNjAwNQ=="></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Antarctica</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script src="/js/third-party/comments/livere.js"></script>
+
+</body>
+</html>
