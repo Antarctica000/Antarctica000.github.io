@@ -21,20 +21,25 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"antarctica.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Linux+shell脚本前言：断断续续东学一点西学一点，命令也总是搞错，决定系统性梳理一遍，记录常用指令与一些蠢问题，等操作系统学完后再来过一遍，尝试深入理解linux，研究内核。">
+    <meta name="description" content="Linux+shell前言：断断续续东学一点西学一点，命令也总是搞错，决定系统性梳理一遍，记录常用指令与一些蠢问题，等操作系统学完后再来过一遍，尝试深入理解linux，研究内核。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux">
 <meta property="og:url" content="https://antarctica.github.io/2024/09/26/Linux/index.html">
 <meta property="og:site_name" content="Antarctica">
-<meta property="og:description" content="Linux+shell脚本前言：断断续续东学一点西学一点，命令也总是搞错，决定系统性梳理一遍，记录常用指令与一些蠢问题，等操作系统学完后再来过一遍，尝试深入理解linux，研究内核。">
+<meta property="og:description" content="Linux+shell前言：断断续续东学一点西学一点，命令也总是搞错，决定系统性梳理一遍，记录常用指令与一些蠢问题，等操作系统学完后再来过一遍，尝试深入理解linux，研究内核。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://antarctica.github.io/images/linux_1.1.png">
+<meta property="og:image" content="https://antarctica.github.io/images/linux1.png">
+<meta property="og:image" content="https://antarctica.github.io/images/linux2.png">
+<meta property="og:image" content="https://antarctica.github.io/images/linux3.png">
+<meta property="og:image" content="https://antarctica.github.io/images/linux4.png">
+<meta property="og:image" content="https://antarctica.github.io/images/linux5.png">
+<meta property="og:image" content="https://antarctica.github.io/images/linux6.png">
 <meta property="article:published_time" content="2024-09-26T02:51:11.000Z">
-<meta property="article:modified_time" content="2024-09-26T14:51:50.582Z">
+<meta property="article:modified_time" content="2024-09-27T01:12:44.020Z">
 <meta property="article:author" content="Antarctica">
 <meta property="article:tag" content="技术">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://antarctica.github.io/images/linux_1.1.png">
+<meta name="twitter:image" content="https://antarctica.github.io/images/linux1.png">
 
 
 <link rel="canonical" href="https://antarctica.github.io/2024/09/26/Linux/">
@@ -117,7 +122,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux-shell%E8%84%9A%E6%9C%AC"><span class="nav-number">1.</span> <span class="nav-text">Linux+shell脚本</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86"><span class="nav-number">1.0.1.</span> <span class="nav-text">一、前置知识</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1%E3%80%81VMware%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">1、VMware网络连接三种方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2%E3%80%81%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%85%8B%E9%9A%86"><span class="nav-number">1.0.1.2.</span> <span class="nav-text">2、虚拟机克隆</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3%E3%80%81%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%BF%AB%E7%85%A7"><span class="nav-number">1.0.1.3.</span> <span class="nav-text">3、虚拟机快照</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4%E3%80%81%E5%AE%89%E8%A3%85vmtools"><span class="nav-number">1.0.1.4.</span> <span class="nav-text">4、安装vmtools</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5%E3%80%81%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="nav-number">1.0.1.5.</span> <span class="nav-text">5、目录结构</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81Linux%E5%AE%9E%E6%93%8D"><span class="nav-number">1.0.2.</span> <span class="nav-text">二、Linux实操</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1%E3%80%81%E8%BF%9C%E7%A8%8B%E7%99%BB%E9%99%86-%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93"><span class="nav-number">1.0.2.1.</span> <span class="nav-text">1、远程登陆&#x2F;文件传输</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2%E3%80%81VIM"><span class="nav-number">1.0.2.2.</span> <span class="nav-text">2、VIM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3%E3%80%81%E5%85%B3%E6%9C%BA-%E9%87%8D%E5%90%AF-%E7%94%A8%E6%88%B7%E7%99%BB%E9%99%86%E6%B3%A8%E9%94%80"><span class="nav-number">1.0.2.3.</span> <span class="nav-text">3、关机&#x2F;重启&#x2F;用户登陆注销</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4%E3%80%81%E6%8C%87%E5%AE%9A%E8%BF%90%E8%A1%8C%E7%BA%A7%E5%88%AB%EF%BC%887%E4%B8%AA%E7%BA%A7%E5%88%AB%EF%BC%89"><span class="nav-number">1.0.2.4.</span> <span class="nav-text">4、指定运行级别（7个级别）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-%E5%B8%AE%E5%8A%A9%E6%8C%87%E4%BB%A4"><span class="nav-number">1.0.2.5.</span> <span class="nav-text">5. 帮助指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%B1%BB%E6%8C%87%E4%BB%A4"><span class="nav-number">1.0.2.6.</span> <span class="nav-text">6. 文件目录类指令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#6-1-%E6%96%87%E4%BB%B6%E5%89%AA%E8%B4%B4%E5%88%A0%E9%99%A4%E5%A4%8D%E5%88%B6%E9%87%8D%E5%90%8D%E7%AD%89"><span class="nav-number">1.0.2.6.1.</span> <span class="nav-text">6.1 文件剪贴删除复制重名等</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-2-%E6%96%87%E4%BB%B6%E6%9F%A5%E7%9C%8B"><span class="nav-number">1.0.2.6.2.</span> <span class="nav-text">6.2 文件查看</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-3-%E6%97%B6%E9%97%B4%E5%92%8C%E6%97%A5%E6%9C%9F"><span class="nav-number">1.0.2.6.3.</span> <span class="nav-text">6.3 时间和日期</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-4-%E6%90%9C%E7%B4%A2%E6%9F%A5%E6%89%BE%E7%B1%BB"><span class="nav-number">1.0.2.6.4.</span> <span class="nav-text">6.4 搜索查找类</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-5-%E5%8E%8B%E7%BC%A9%E5%92%8C%E8%A7%A3%E5%8E%8B%E7%B1%BB"><span class="nav-number">1.0.2.6.5.</span> <span class="nav-text">6.5 压缩和解压类</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux-shell"><span class="nav-number">1.</span> <span class="nav-text">Linux+shell</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86"><span class="nav-number">1.0.1.</span> <span class="nav-text">一、前置知识</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1%E3%80%81VMware%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">1、VMware网络连接三种方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2%E3%80%81%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%85%8B%E9%9A%86"><span class="nav-number">1.0.1.2.</span> <span class="nav-text">2、虚拟机克隆</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3%E3%80%81%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%BF%AB%E7%85%A7"><span class="nav-number">1.0.1.3.</span> <span class="nav-text">3、虚拟机快照</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4%E3%80%81%E5%AE%89%E8%A3%85vmtools"><span class="nav-number">1.0.1.4.</span> <span class="nav-text">4、安装vmtools</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5%E3%80%81%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="nav-number">1.0.1.5.</span> <span class="nav-text">5、目录结构</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81Linux%E5%AE%9E%E6%93%8D"><span class="nav-number">1.0.2.</span> <span class="nav-text">二、Linux实操</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1%E3%80%81%E8%BF%9C%E7%A8%8B%E7%99%BB%E9%99%86-%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93"><span class="nav-number">1.0.2.1.</span> <span class="nav-text">1、远程登陆&#x2F;文件传输</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2%E3%80%81VIM"><span class="nav-number">1.0.2.2.</span> <span class="nav-text">2、VIM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3%E3%80%81%E5%85%B3%E6%9C%BA-%E9%87%8D%E5%90%AF-%E7%94%A8%E6%88%B7%E7%99%BB%E9%99%86%E6%B3%A8%E9%94%80"><span class="nav-number">1.0.2.3.</span> <span class="nav-text">3、关机&#x2F;重启&#x2F;用户登陆注销</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4%E3%80%81%E6%8C%87%E5%AE%9A%E8%BF%90%E8%A1%8C%E7%BA%A7%E5%88%AB%EF%BC%887%E4%B8%AA%E7%BA%A7%E5%88%AB%EF%BC%89"><span class="nav-number">1.0.2.4.</span> <span class="nav-text">4、指定运行级别（7个级别）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5%E3%80%81%E5%B8%AE%E5%8A%A9%E6%8C%87%E4%BB%A4-%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="nav-number">1.0.2.5.</span> <span class="nav-text">5、帮助指令+常用快捷键</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6%E3%80%81%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%B1%BB%E6%8C%87%E4%BB%A4"><span class="nav-number">1.0.2.6.</span> <span class="nav-text">6、文件目录类指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7%E3%80%81%E6%97%B6%E9%97%B4%E6%97%A5%E6%9C%9F%E7%B1%BB%E6%8C%87%E4%BB%A4"><span class="nav-number">1.0.2.7.</span> <span class="nav-text">7、时间日期类指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8%E3%80%81%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86%E7%B1%BB%E6%8C%87%E4%BB%A4"><span class="nav-number">1.0.2.8.</span> <span class="nav-text">8、用户管理类指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9%E3%80%81%E6%90%9C%E7%B4%A2%E6%9F%A5%E6%89%BE%E7%B1%BB%E6%8C%87%E4%BB%A4"><span class="nav-number">1.0.2.9.</span> <span class="nav-text">9、搜索查找类指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10%E3%80%81%E5%8E%8B%E7%BC%A9%E8%A7%A3%E5%8E%8B%E7%B1%BB%E6%8C%87%E4%BB%A4"><span class="nav-number">1.0.2.10.</span> <span class="nav-text">10、压缩解压类指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#11%E3%80%81%E7%A3%81%E7%9B%98%E6%9F%A5%E7%9C%8B%E5%88%86%E5%8C%BA%E7%B1%BB%E6%8C%87%E4%BB%A4"><span class="nav-number">1.0.2.11.</span> <span class="nav-text">11、磁盘查看分区类指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#12%E3%80%81%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86%E7%B1%BB%E6%8C%87%E4%BB%A4"><span class="nav-number">1.0.2.12.</span> <span class="nav-text">12、进程管理类指令</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81Shell%E7%BC%96%E7%A8%8B"><span class="nav-number">1.0.3.</span> <span class="nav-text">三、Shell编程</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -203,9 +208,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2024-09-26 10:51:11 / 修改时间：22:51:50" itemprop="dateCreated datePublished" datetime="2024-09-26T10:51:11+08:00">2024-09-26</time>
+      <time title="创建时间：2024-09-26 10:51:11" itemprop="dateCreated datePublished" datetime="2024-09-26T10:51:11+08:00">2024-09-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-09-27 09:12:44" itemprop="dateModified" datetime="2024-09-27T09:12:44+08:00">2024-09-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -233,10 +244,10 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h1 id="Linux-shell脚本"><a href="#Linux-shell脚本" class="headerlink" title="Linux+shell脚本"></a>Linux+shell脚本</h1><p><strong>前言：</strong>断断续续东学一点西学一点，命令也总是搞错，决定系统性梳理一遍，记录常用指令与一些蠢问题，等操作系统学完后再来过一遍，尝试深入理解linux，研究内核。</p>
+    <div class="post-body" itemprop="articleBody"><h1 id="Linux-shell"><a href="#Linux-shell" class="headerlink" title="Linux+shell"></a>Linux+shell</h1><p><strong>前言：</strong>断断续续东学一点西学一点，命令也总是搞错，决定系统性梳理一遍，记录常用指令与一些蠢问题，等操作系统学完后再来过一遍，尝试深入理解linux，研究内核。</p>
 <span id="more"></span>
 
-<h3 id="一、前置知识"><a href="#一、前置知识" class="headerlink" title="一、前置知识"></a>一、前置知识</h3><h4 id="1、VMware网络连接三种方式"><a href="#1、VMware网络连接三种方式" class="headerlink" title="1、VMware网络连接三种方式"></a>1、VMware网络连接三种方式</h4><p><img src="/../images/linux_1.1.png" alt="linux_1.1"></p>
+<h3 id="一、前置知识"><a href="#一、前置知识" class="headerlink" title="一、前置知识"></a>一、前置知识</h3><h4 id="1、VMware网络连接三种方式"><a href="#1、VMware网络连接三种方式" class="headerlink" title="1、VMware网络连接三种方式"></a>1、VMware网络连接三种方式</h4><p><img src="/../images/linux1.png" alt="linux_1.1"></p>
 <p><strong>桥接模式：</strong>虚拟机直连外部物理网络，可以互相通讯，但是容易IP冲突，且不够安全<br><strong>NAT模式：</strong>虚拟机和主机构建一个专用网络，并通过NAT设备对IP进行转换。虚拟机通过共享主机IP可以访问外部网络，但外部网络无法访问虚拟机。<br>安全且不冲突。我现在采用的也是这种模式。<br><strong>仅主机模式：</strong>虚拟机只与主机共享一个专用网络，与外部网络无法通信。</p>
 <p><strong>疑惑：</strong>虚拟机ping主机时能成功，但是主机ping虚拟机时 ”请求超时“ ？<br><strong>解决：</strong>更改了centos的网络配置文件，修改静态IP，且主机中虚拟网卡VMware8的IP地址由自动更换为手动定义，同虚拟机的ip地址在同一网段，同时也关闭了主机防火墙，遂成功。</p>
 <p>然后学会了ssh远程登陆。<br>虽然会用，但是原理还是懵懵懂懂。果然还是要好好等学完计网才能真正理解。</p>
@@ -247,144 +258,129 @@
 <h4 id="5、目录结构"><a href="#5、目录结构" class="headerlink" title="5、目录结构"></a>5、目录结构</h4><p><strong>&#x2F;：</strong><code>Root Directory</code> 所有文件和目录的起点（房门）<br><strong>&#x2F;usr：</strong><code>User System Resources</code>存放用户程序和数据的地方 类似于program files（公共图书馆）<br><strong>&#x2F;etc：</strong><code>Etcetera</code>存放系统配置文件的地方（规划图和规则手册）<br><strong>&#x2F;boot：</strong><code>Boot Loader Files</code>存放启动linux时使用的一些核心文件 包括一些连接文件及镜像文件（启动汽车的钥匙和仪表盘）<br><strong>&#x2F;dev：</strong><code>Device Files</code>存放设备文件 代表系统中的硬件设备 如硬盘 终端等 类似于Windows的设备管理器（电器控制面板）<br><strong>&#x2F;var：</strong><code>Variable Data</code>存放可变数据（如日志文件、邮件等）的地方（仓库）<br><strong>&#x2F;mnt：</strong><code>Mount Directory</code>用于临时挂载文件系统的地方 通常用于管理员手动挂载文件系统（临时存放区）<br><strong>&#x2F;bin：</strong><code>Binary Executables</code> 存放系统启动和运行时需要的基本命令和工具 例如 <code>ls</code>, <code>cp</code> （厨房里的常用工具）<br><strong>&#x2F;sbin：</strong><code>System Binary Executables</code>存放系统管理命令的地方 这些命令通常只供管理员使用（专业工具房）<br><strong>&#x2F;home：</strong><code>Home Directories</code>存放用户个人文件的地方 每个用户都有自己的子目录（居民区）<br><strong>&#x2F;lib：</strong><code>Library Files</code>存放系统库文件 这些文件是运行程序时所需的共享库（工具库）<br><strong>&#x2F;media：</strong><code>Media Mount Points</code>挂载可移动媒体的地方 比如 USB 驱动器和光盘（停车场）<br><strong>&#x2F;opt：</strong><code>Optional Application Software</code>用于安装附加软件包的地方 通常是第三方软件（购物中心）<br><strong>&#x2F;proc：</strong><code>Process Information</code>虚拟文件系统 提供有关内核和进程的信息（实时检测仪）<br><strong>&#x2F;srv：</strong><code>Service Data</code>存放服务数据的地方 供系统提供特定服务时使用（服务中心）<br><strong>&#x2F;root：</strong><code>Root User&#39;s Home DirectoryRoot</code>超级用户（root 用户）的主目录（主人房间）<br><strong>&#x2F;tmp：</strong><code>Temporary Files</code>存放临时文件的地方（临时工作台）</p>
 <h3 id="二、Linux实操"><a href="#二、Linux实操" class="headerlink" title="二、Linux实操"></a>二、Linux实操</h3><h4 id="1、远程登陆-文件传输"><a href="#1、远程登陆-文件传输" class="headerlink" title="1、远程登陆&#x2F;文件传输"></a>1、远程登陆&#x2F;文件传输</h4><h4 id="2、VIM"><a href="#2、VIM" class="headerlink" title="2、VIM"></a>2、VIM</h4><p>MIT - Missing-Semester略有听讲，有些基础。这个课也是听一半丢一半。抽时间全听了。<br>vim三个状态切换，基本指令会使用，不过掌握得还不够熟练，不够深刻。<br>这个命令就不记录了，用熟即可。</p>
 <p><strong>疑惑：</strong>为什么物理windows系统安装软件等要从官网上下载压缩包，但是linux只需要短短几行命令就搞定了？<br><strong>GPT：</strong>在物理的 Windows 系统中，安装 JDK 需要下载和运行安装程序，这是因为 Windows 的软件管理方式与 Linux 有很大不同。而在 Linux 上，借助强大的包管理工具，用户可以通过简单的命令快速安装软件，自动处理依赖关系，省去了许多手动操作的步骤。这种设计理念使得 Linux 特别适合开发和服务器环境的使用。<br><strong>疑惑2.0：</strong>具体是怎么做到的？我要去学好操作系统 细细阅读linux的源码，体会它的强大</p>
-<h4 id="3、关机-重启-用户登陆注销"><a href="#3、关机-重启-用户登陆注销" class="headerlink" title="3、关机&#x2F;重启&#x2F;用户登陆注销"></a>3、关机&#x2F;重启&#x2F;用户登陆注销</h4><p><strong>shutdown</strong></p>
-<ul>
-<li><code>shutdown -h now</code>：表示立即关机</li>
-<li><code>shutdown -h 1</code>：表示1分钟后关机（后悔还可-c立即停止）</li>
-<li><code>shutdown -r now</code>：立即重启</li>
+<h4 id="3、关机-重启-用户登陆注销"><a href="#3、关机-重启-用户登陆注销" class="headerlink" title="3、关机&#x2F;重启&#x2F;用户登陆注销"></a>3、关机&#x2F;重启&#x2F;用户登陆注销</h4><ul>
+<li><p><code>shutdown</code></p>
+<p><code>shutdown -h now</code>：表示立即关机</p>
+<p><code>shutdown -h 1</code>：表示1分钟后关机（后悔还可-c立即停止）</p>
+<p><code>shutdown -r now</code>：立即重启</p>
+</li>
+<li><p><code>halt</code> 关机</p>
+</li>
+<li><p><code>reboot</code> 重启系统</p>
+</li>
+<li><p><code>sync</code>把内存的数据同步到磁盘上<br>（当关机或者重启时，都应该先执行一下sync，防止数据丢失）<br><strong>疑惑：</strong>为什么要这样做？为什么会丢失？<br><strong>回答：</strong>linux机制是预先读取，延迟写入，所以直接关机等会造成内存还没来得及写入</p>
+</li>
+<li><p><code>logout</code>注销用户（在图形运行级别无效，在运行级别3有效）</p>
+</li>
 </ul>
-<p><strong>halt</strong>：关机</p>
-<p><strong>reboot：</strong> 重启系统</p>
-<p><strong>sync：</strong>把内存的数据同步到磁盘上<br>当关机或者重启时，都应该先执行一下sync，防止数据丢失。<br><strong>疑惑：</strong>为什么要这样做？为什么会丢失？<br><strong>回答：</strong>（linux机制是预先读取，延迟写入，所以直接关机等会造成内存还没来得及写入）</p>
-<p><strong>logout：</strong>注销用户（在图形运行级别无效，在运行级别3有效。）</p>
 <h4 id="4、指定运行级别（7个级别）"><a href="#4、指定运行级别（7个级别）" class="headerlink" title="4、指定运行级别（7个级别）"></a>4、指定运行级别（7个级别）</h4><ul>
-<li>0.关机</li>
-<li>1.单用户【找回丢失密码】</li>
-<li>2.多用户状态没有网络服务</li>
-<li>3.多用户状态有网络服务</li>
-<li>4.系统未使用保留给用户</li>
-<li>5.图形界面</li>
-<li>6.系统重启</li>
+<li><code>0</code>关机</li>
+<li><code>1</code>单用户（找回丢失密码</li>
+<li><code>2</code>多用户状态没有网络服务</li>
+<li><code>3</code>多用户状态有网络服务（常用）</li>
+<li><code>4</code>系统未使用保留给用户</li>
+<li><code>5</code>图形界面（常用）</li>
+<li><code>6</code>系统重启</li>
 </ul>
-<h4 id="5-帮助指令"><a href="#5-帮助指令" class="headerlink" title="5. 帮助指令"></a>5. 帮助指令</h4><ul>
-<li><p>man（例如man ls）</p>
+<h4 id="5、帮助指令-常用快捷键"><a href="#5、帮助指令-常用快捷键" class="headerlink" title="5、帮助指令+常用快捷键"></a>5、帮助指令+常用快捷键</h4><ul>
+<li><code>man ls</code> 详细查看命令</li>
+<li><code>help --ls</code> 简略查看命令（此形式用于查看外部命令）</li>
+<li><code>ctrl+c</code> 停止进程</li>
+<li><code>ctrl+l</code> 清屏</li>
+<li><code>tab</code> 自动补全（很好用 经常用）</li>
+</ul>
+<h4 id="6、文件目录类指令"><a href="#6、文件目录类指令" class="headerlink" title="6、文件目录类指令"></a>6、文件目录类指令</h4><p><img src="/../images/linux2.png" alt="linux_1.1"></p>
+<p><img src="/../images/linux3.png" alt="linux_1.1"></p>
+<ul>
+<li><p><code>pwd</code> 显示当前工作目录的绝对路径</p>
 </li>
-<li><p>help [命令或配置文件]</p>
+<li><p><code>cd</code><br><code>cd </code> 回到自己的家目录<br><code>cd - </code> 回到当前目录的上一级目录<br><code>cd ..</code> 回到当前目录的上一级目录<br>（ <code>cd ../home</code> 同级文件跳跃）<br>（ <code>cd ./hello</code> 下级文件跳跃）</p>
 </li>
-</ul>
-<h4 id="6-文件目录类指令"><a href="#6-文件目录类指令" class="headerlink" title="6. 文件目录类指令"></a>6. 文件目录类指令</h4><h5 id="6-1-文件剪贴删除复制重名等"><a href="#6-1-文件剪贴删除复制重名等" class="headerlink" title="6.1 文件剪贴删除复制重名等"></a>6.1 文件剪贴删除复制重名等</h5><ul>
-<li>pwd：Print Working Directory，显示当前工作目录的绝对路径。</li>
-<li>ls：-a：显示当前目录所有的文件和目录，包括隐藏的；<ul>
-<li>-l：以列表的方式显示信息。</li>
-</ul>
+<li><p><code>ls</code><br><code>ls -a</code> 显示当前目录所有的文件和目录（包括隐藏的）<br><code>ls -l</code> 以列表的方式显示文件信息</p>
 </li>
-<li>cd：cd ~：回到自己的家目录；cd …：回到当前目录的上一级目录。</li>
-<li>mkdir：创建目录；-p：创建多级目录。</li>
-<li>rmdir：删除空目录。rmdir不能删除非空的目录。如果需要删除非空的目录，需要使用rm -rf。</li>
-<li>cp：拷贝文件到指定目录；<ul>
-<li>-r：递归复制整个文件夹。强制覆盖不提示的方法：</li>
-<li>cp命令改为\cp</li>
-</ul>
+<li><p><code>mkdir</code> 创建目录<br><code>mkdir -p</code> 创建多级目录</p>
 </li>
-<li>rm：移除文件或目录；<ul>
-<li>-r：递归删除整个文件夹；</li>
-<li>-f：强制删除不提示。</li>
-</ul>
+<li><p><code>rmdir</code> 删除空目录<br><code>rm -rf</code> 删除非空的目录</p>
 </li>
-<li>mv：移动文件与目录或重命名，两种功能！</li>
-<li>touch：创建空文件。可以一次性创建多个文件</li>
-<li>ln 给文件创建一个软连接</li>
-</ul>
-<h5 id="6-2-文件查看"><a href="#6-2-文件查看" class="headerlink" title="6.2 文件查看"></a>6.2 文件查看</h5><ul>
-<li>cat：查看文件内容。只能浏览文件，而不能修改文件。<ul>
-<li>-n：显示行号。</li>
-<li>结尾加上 | more：分页显示，不会全部一下显示完。</li>
-</ul>
+<li><p><code>touch</code> 创建空文件（可以一次性创建多个文件 直接vim也可以新建</p>
 </li>
-<li>more：是一个基于VI编辑器的文本过滤器，它以全屏幕的方式按页显示文本文件的内容。more还内置了很多快捷键：<ul>
-<li>空白键（Space）：向下翻一页</li>
-<li>Enter：向下翻一行</li>
-<li>q：立刻离开more，不再显示该文件内容</li>
-<li>Ctrl + F：向下滚动一屏</li>
-<li>Ctrl + B：返回上一屏</li>
-<li>&#x3D; :输出当前行的行号</li>
-<li>:f 输出文件名和当前行的行号</li>
-</ul>
+<li><p><code>cp</code> 拷贝文件到指定目录<br><code>cp -r</code> 递归复制整个文件夹<br><code>\cp</code> 强制覆盖 屏蔽提示</p>
 </li>
-<li>less：用来分屏查看文件内容，与more相似，但是更强大，支持各种显示终端。less指令在显示文件内容时，并不是一次将整个文件加载之后才显示，而是根据显示需要加载内容。对于显示大型文件具有较高的效率。</li>
-<li>head：显示文件的开头部分。-n 5：看前面5行内容。</li>
-<li>tail：输出文件中尾部的内容。<ul>
-<li>-n 5：看后面5行内容。</li>
-<li>-f：时事追踪该文档的所有更新</li>
-</ul>
+<li><p><code>rm</code> 移除文件或目录（<code>rm ./*</code> 删除当前目录所有文件）<br><code>rm -r</code> 递归删除整个文件夹<br><code>rm -f</code> 强制删除不提示</p>
 </li>
-<li>&gt;指令：输出重定向。如果不存在会创建文件，否则会将原来的文件内容覆盖。</li>
-<li>&gt;&gt;指令：追加。如果不存在会创建文件，否则不会覆盖原来的文件内容，而是追加到文件的尾部。</li>
-<li>echo：输出内容到控制台。</li>
-<li>history：查看历史指令</li>
-</ul>
-<h5 id="6-3-时间和日期"><a href="#6-3-时间和日期" class="headerlink" title="6.3 时间和日期"></a>6.3 时间和日期</h5><ul>
-<li>date：显示当前日期和时间<ul>
-<li>date “+%Y”：显示当前年份</li>
-<li>date “+%d”：显示当前月份</li>
-<li>date “+%Y-%m-%d %H:%M:%S”：显示年-月-日 时：分：秒</li>
-<li>设置日期：date -s 字符串时间</li>
-</ul>
+<li><p><code>mv</code> 移动文件与目录或重命名</p>
 </li>
-<li>cal：查看日历指令；<ul>
-<li>cal [月] [年份]：显示某一年或月的日历</li>
-</ul>
+<li><p><code>cat</code> 只查看文件内容<br><code>cat -n</code> 显示行号</p>
+</li>
+<li><p><code>more</code> 是一个基于VI编辑器的文本过滤器<br>Space 向下翻一页<br>Enter 向下翻一行<br>q 退出 不再显示该文件内容<br>Ctrl + F 向下滚动一屏<br>Ctrl + B 返回上一屏<br>&#x3D;  输出当前行的行号<br>:f  输出文件名和当前行的行号</p>
+</li>
+<li><p><code>less</code> 用来分屏查看文件内容 比more更强大 支持各种显示终端</p>
+</li>
+<li><p><code>echo</code> 输出内容到控制台<br>（与输出重定向等结合 <code>echo helloworld &gt;&gt; hello.c</code>）<br><code>echo -e</code> 支持反斜线控制的字符转换</p>
+</li>
+<li><p><code>&gt;</code> 输出重定向（若不存在会创建文件 否则将原来文件覆盖）</p>
+</li>
+<li><p><code>&gt;&gt;</code> 追加（若不存在会创建文件 否则直接追加到文件的尾部）</p>
+</li>
+<li><p><code>head</code> 显示文件的开头部分<br><code>head -n 5</code>看前面5行内容</p>
+</li>
+<li><p><code>tail</code> 输出文件中尾部的内容（默认10行）<br><code>tail -n 5</code> 看后面5行内容。<br><code>tail -f</code> 实时追踪该文档的所有更新<br>（<code>ctrl+s</code> 暂停追踪 <code>ctrl+q</code> 继续追踪）</p>
+</li>
+<li><p><code>ln</code> 给文件创建一个软连接（概念有点像指针）<br>（先进入想连接的文件再输入<code>ln -s /root/info myInfo</code>）<br><code>rm -rf 软连接名</code> 删除软连接<br>（注意不是<code>rm -rf 软连接名/</code>这会把真实目录内容也给删掉）</p>
+</li>
+<li><p><code>history</code> 查看历史指令</p>
 </li>
 </ul>
-<h5 id="6-4-搜索查找类"><a href="#6-4-搜索查找类" class="headerlink" title="6.4 搜索查找类"></a>6.4 搜索查找类</h5><ul>
-<li>find：从指定目录向下递归的遍历其各个子目录，将满足条件的文件或者目录显示在终端。<ul>
-<li>find (搜索范围) -name (文件名)：按照指定的文件名查找模式查找文件。</li>
-<li>find (搜索范围) -user (用户名)：按照指定的用户名查找模式查找文件。</li>
-<li>find (搜索范围) -size (+多少&#x2F;-多少&#x2F;多少)：按照指定的文件大小查找模式查找文件（大于多少&#x2F;小于多少&#x2F;等于多少）</li>
-<li>查询 &#x2F;目录下所有.txt的文件：find &#x2F; -name *.txt</li>
+<h4 id="7、时间日期类指令"><a href="#7、时间日期类指令" class="headerlink" title="7、时间日期类指令"></a>7、时间日期类指令</h4><ul>
+<li><code>date</code> 显示当前日期和时间<br><code>date +%Y</code> 显示当前年份<br><code>date +%d</code>显示当前月份<br><code>date +%Y-%m-%d %H:%M:%S</code> 显示年-月-日 时：分：秒<br><code>date -s</code> 设置系统当前时间</li>
+<li><code>cal</code> 查看日历指令<br><code>cal [月] [年份]</code>显示某一年或月的日历</li>
 </ul>
+<h4 id="8、用户管理类指令"><a href="#8、用户管理类指令" class="headerlink" title="8、用户管理类指令"></a>8、用户管理类指令</h4><ul>
+<li><code>useradd</code> 添加新用户<br><code>useradd -g 组名 用户名</code> 添加新用户到某个组</li>
+<li><code>passwd</code> 设置用户密码</li>
+<li><code>id</code> 查看用户是否存在</li>
+<li><code>cat /etc/passwd</code> 查看创建了哪些用户</li>
+<li><code>su</code> 切换用户</li>
+<li><code>sudo</code> 设置普通用户具有root权限（非常强大）</li>
+<li><code>groupadd</code> 新增组</li>
+<li><code>groupdel</code> 删除组</li>
+<li><code>chmod</code> 改变文件权限</li>
+<li><code>chown</code> 改变所有者</li>
+</ul>
+<h4 id="9、搜索查找类指令"><a href="#9、搜索查找类指令" class="headerlink" title="9、搜索查找类指令"></a>9、搜索查找类指令</h4><ul>
+<li><code>find</code> 从指定目录向下递归的遍历其各个子目录 将满足条件的文件或者目录显示在终端<br><code>find -name</code> 按照指定的文件名查找模式查找文件（<code>find /root -name info</code>）<br><code>find /root -name &quot;*.txt&quot; </code>  查询目录下所有.txt的文件<br><code>find -user</code> 按照指定的用户名查找模式查找文件。<br><code>find -size</code> 按照指定的文件大小查找模式查找文件（大于多少&#x2F;小于多少&#x2F;等于多少）</li>
+<li><code>locate</code> 快速定位文件路径<br>利用事先建立的系统中所有文件名称及路径的locate数据库实现快速定位给定的文件 速度极快<br>管理员必须定期更新locate时刻（默认每日更新一次）<br>在第一次运行之前 须使用<code>updatedb</code>指令创建locate数据库</li>
+<li><code>grep</code> 过滤查找（将前一个命令的处理结果输出传递给后面命令处理 经常跟管道一起使用）<br><code>grep -n</code> 显示匹配行及行号<br>（<code>ls | grep .java</code>）<br>（<code>cat hello.txt | grep yes</code>）<br>（<code>grep -n hello initial-setup-ks.cfg | wc</code>）</li>
+</ul>
+<h4 id="10、压缩解压类指令"><a href="#10、压缩解压类指令" class="headerlink" title="10、压缩解压类指令"></a>10、压缩解压类指令</h4><ul>
+<li><p><code>gzip</code>  压缩为.gz文件 原来文件不保留</p>
 </li>
-<li>locate：locate (搜索文件)<ul>
-<li>可以快速定位文件路径。locate指令利用事先建立的系统中所有文件名称及路径的locate数据库实现快速定位给定的文件。</li>
-<li>locate指令无需遍历整个文件系统，查询速度较快。为了保证查询结果的准确度，管理员必须定期更新locate时刻。</li>
-<li>在第一次运行之前，必须使用updatedb指令创建locate数据库。</li>
-</ul>
+<li><p><code>gunzip</code> 解压缩 同样也不保留源文件</p>
 </li>
-<li>grep：过滤查找，表示将前一个命令的处理结果输出传递给后面的命令处理。经常跟管道一起使用。<ul>
-<li>grep [选项] 查找内容 源文件</li>
-<li>-n：显示匹配行及行号。</li>
-<li>-i：忽略大小写字母。</li>
-<li>cat hello.txt | grep yes</li>
-</ul>
+<li><p><code>zip</code> </p>
 </li>
-</ul>
-<h5 id="6-5-压缩和解压类"><a href="#6-5-压缩和解压类" class="headerlink" title="6.5 压缩和解压类"></a>6.5 压缩和解压类</h5><ul>
-<li>gzip&#x2F;gunzip：压缩文件&#x2F;解压<ul>
-<li>gzip (文件)：压缩为.gz文件，原来文件不保留。</li>
-<li>gunzip (文件)：解压缩，同样也不保留源文件。</li>
-</ul>
+<li><p><code>unzip</code></p>
 </li>
-<li>zip&#x2F;unzip：压缩文件&#x2F;解压<ul>
-<li>zip [选项] (压缩后文件xxx.zip) (将要压缩的文件)</li>
-<li>unzip [选项] (要解压的文件xxx.zip)</li>
-<li>zip -r：递归压缩，即压缩目录</li>
-<li>unzip -d (目录)：指定解压后的文件的存放目录</li>
-</ul>
+<li><p><code>zip -r</code>递归压缩 即压缩目录</p>
 </li>
-<li>tar：打包指令，最后打包后的文件是.tar.gz的文件<ul>
-<li>tar [选项] xxx.tar.gz (打包的内容)</li>
-<li>-c：产生.tar打包文件</li>
-<li>-v：显示详细信息</li>
-<li>-f：指定压缩后的文件名</li>
-<li>-z：打包同时压缩</li>
-<li>-x：解压.tar文件</li>
-<li>压缩：tar -zcvf (压缩后文件名) (要压缩的文件)</li>
-<li>解压：tar -zxvf (要解压的文件)</li>
-<li>解压到指定目录：tar -zxvf (要解压的文件) -C (指定目录)，指定解压到的目录要存在。</li>
-</ul>
+<li><p><code>unzip -d</code>指定解压后的文件的存放目录</p>
+</li>
+<li><p><code>tar</code> 打包指令 最后打包后的文件是.tar.gz的文件<br><code>-c</code>产生.tar打包文件<br><code>-v</code>显示详细信息<br><code>-f</code>指定压缩后的文件名<br><code>-z</code>打包同时压缩<br><code>-x</code>解压.tar文件</p>
 </li>
 </ul>
-
+<h4 id="11、磁盘查看分区类指令"><a href="#11、磁盘查看分区类指令" class="headerlink" title="11、磁盘查看分区类指令"></a>11、磁盘查看分区类指令</h4><ul>
+<li><code>du</code> 查看磁盘占用情况</li>
+<li><code>df</code> 查看磁盘空间使用情况（<code>df -h</code>）</li>
+<li><code>lsblk</code> 查看设备挂载情况（<code>lsblk -f</code>）</li>
+<li><code>mount</code> 挂载<br><img src="/../images/linux4.png" alt="linux_1.1"></li>
+<li><code>umount</code> 卸载</li>
+<li><code>fdisk</code> 分区<br><code>fdisk -l</code> 查看磁盘分区详情<br><code>fdisk &quot;name&quot;</code> 对新增硬盘进行分区操作</li>
+</ul>
+<h4 id="12、进程管理类指令"><a href="#12、进程管理类指令" class="headerlink" title="12、进程管理类指令"></a>12、进程管理类指令</h4><ul>
+<li><code>ps</code> 查看当前系统进程状态<br><code>ps aux | grep xxx</code> 查看系统中所有进程<br><code>ps -ef | grep xxx</code> 查看子父进程间的关系<br><img src="/../images/linux5.png" alt="linux_1.1"></li>
+<li><img src="/../images/linux6.png" alt="linux_1.1"></li>
+</ul>
+<h3 id="三、Shell编程"><a href="#三、Shell编程" class="headerlink" title="三、Shell编程"></a>三、Shell编程</h3>
     </div>
 
     
